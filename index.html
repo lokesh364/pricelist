@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PriceSheet – Godavari Tent Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Josefin+Sans:wght@400;600;700&family=Source+Serif+4:wght@400;600&family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;600&family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f0f2f5;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+input,select,textarea,button{font-family:inherit}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:#f0f2f5}
+::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:4px}
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:420px;min-width:320px;background:#fff;border-right:1px solid #e5e7eb;display:flex;flex-direction:column;overflow:hidden;box-shadow:2px 0 12px rgba(0,0,0,.04)}
+.sidebar-top{padding:18px 20px 0;border-bottom:1px solid #f0f0f0}
+.brand-row{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.brand-icon{width:32px;height:32px;background:linear-gradient(135deg,#6366f1,#a78bfa);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;flex-shrink:0}
+.brand-name{font-size:14px;font-weight:700;color:#111;letter-spacing:-.3px}
+.brand-tag{font-size:10px;color:#aaa;letter-spacing:.5px}
+.tabs{display:flex}
+.tab{flex:1;padding:10px 4px;text-align:center;font-size:11px;font-weight:500;color:#9ca3af;border:none;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:.3px;transition:all .15s;background:none}
+.tab.active{font-weight:700;color:#6366f1;border-bottom-color:#6366f1}
+.sidebar-body{flex:1;overflow-y:auto;padding:20px;background:#fafafa}
+.section{margin-bottom:22px}
+.lbl{font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:block}
+.inp{width:100%;background:#fff;border:1.5px solid #e5e7eb;border-radius:8px;padding:9px 13px;color:#111;font-size:13px;outline:none;transition:border-color .15s}
+.inp:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.08)}
+.tarea{width:100%;background:#fff;border:1.5px solid #e5e7eb;border-radius:8px;padding:9px 13px;color:#111;font-size:13px;outline:none;resize:vertical;min-height:68px;line-height:1.5}
+.tarea:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.08)}
+.sel{width:100%;background:#fff;border:1.5px solid #e5e7eb;border-radius:8px;padding:9px 36px 9px 13px;color:#111;font-size:13px;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.sel:focus{border-color:#6366f1}
+.inp-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* Logo */
+.logo-upload-label{display:flex;flex-direction:column;align-items:center;gap:6px;background:#f8f9fa;border:1.5px dashed #d1d5db;border-radius:8px;padding:20px;cursor:pointer;transition:border-color .15s}
+.logo-upload-label:hover{border-color:#6366f1}
+.logo-preview-box{background:#f8f9fa;border:1.5px solid #e5e7eb;border-radius:8px;padding:14px;text-align:center}
+.logo-preview-box img{max-height:48px;max-width:160px;margin:0 auto 10px;display:block}
+.logo-actions{display:flex;gap:8px;justify-content:center}
+.btn-change{padding:6px 14px;background:#fff;border:1.5px solid #e5e7eb;border-radius:6px;font-size:11px;color:#555;cursor:pointer;font-weight:600}
+.btn-remove-logo{padding:6px 14px;background:#fff;border:1.5px solid #fca5a5;border-radius:6px;font-size:11px;color:#ef4444;cursor:pointer;font-weight:600}
+
+/* Item rows */
+.hint{font-size:11px;color:#bbb;margin-bottom:14px;line-height:1.5;background:#f0f4ff;border:1px solid #e0e7ff;border-radius:6px;padding:8px 10px;color:#6366f1}
+.item-row{background:#fff;border:1.5px solid #e5e7eb;border-radius:10px;padding:13px 14px;margin-bottom:10px;position:relative}
+.item-row.drag-over{border-color:#6366f1;background:#f5f3ff}
+.item-row.dragging{opacity:.4}
+.drag-handle{color:#ccc;font-size:14px;margin-right:8px;user-select:none;flex-shrink:0;cursor:grab}
+.item-name-row{display:flex;align-items:center;margin-bottom:8px}
+.item-inp{background:#f8f9fa;border:1.5px solid #eee;border-radius:6px;padding:7px 10px;color:#111;font-size:12px;outline:none;width:100%}
+.item-inp:focus{border-color:#6366f1}
+.btn-remove-item{position:absolute;top:10px;right:10px;background:none;border:none;color:#ddd;cursor:pointer;font-size:18px;line-height:1;padding:2px;transition:color .15s}
+.btn-remove-item:hover{color:#ef4444}
+.btn-add{width:100%;background:transparent;border:1.5px dashed #d1d5db;border-radius:8px;padding:11px;color:#9ca3af;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
+.btn-add:hover{border-color:#6366f1;color:#6366f1}
+
+/* Variant section inside item */
+.variant-section{margin-top:8px;background:#f8f9fa;border:1px solid #e8e8e8;border-radius:7px;padding:10px 10px 6px}
+.variant-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.variant-lbl{font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase}
+.btn-add-variant{background:#eef2ff;border:1px solid #c7d2fe;border-radius:5px;color:#6366f1;font-size:10px;font-weight:700;padding:3px 9px;cursor:pointer;transition:all .15s}
+.btn-add-variant:hover{background:#e0e7ff}
+.variant-row{display:flex;gap:6px;margin-bottom:6px;align-items:center}
+.variant-type-inp{flex:1.2}
+.variant-price-wrap{flex:1;position:relative}
+.variant-price-sym{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px;pointer-events:none}
+.variant-price-inp{padding-left:18px!important}
+.btn-remove-variant{background:none;border:none;color:#ddd;cursor:pointer;font-size:15px;padding:0 2px;flex-shrink:0;transition:color .15s}
+.btn-remove-variant:hover{color:#ef4444}
+.no-variant-hint{font-size:11px;color:#bbb;text-align:center;padding:4px 0 2px}
+
+/* Layout picker */
+.layout-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.layout-card{background:#f8f9fa;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px 10px 10px;cursor:pointer;transition:all .15s;text-align:center}
+.layout-card:hover{border-color:#a5b4fc}
+.layout-card.active{background:#eef2ff;border-color:#6366f1}
+.layout-card svg{color:#bbb;margin-bottom:7px;display:block;margin-left:auto;margin-right:auto}
+.layout-card.active svg{color:#6366f1}
+.lc-name{font-size:11px;font-weight:500;color:#555;margin-bottom:2px}
+.layout-card.active .lc-name{font-weight:700;color:#4338ca}
+.lc-desc{font-size:9px;color:#aaa;line-height:1.3}
+
+/* Theme swatches */
+.theme-swatches{display:flex;gap:12px;flex-wrap:wrap}
+.theme-swatch{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+.swatch-circle{width:38px;height:38px;border-radius:50%;border:3px solid transparent;box-shadow:0 0 0 1px #e5e7eb;position:relative;overflow:hidden;transition:all .15s}
+.swatch-circle.active{border-color:#6366f1;box-shadow:0 0 0 1px #6366f1}
+.swatch-pip{position:absolute;bottom:0;right:0;width:18px;height:18px;border-radius:50% 0 0 0}
+.swatch-label{font-size:9px;color:#aaa;font-weight:400;text-align:center;line-height:1.2}
+.swatch-circle.active+.swatch-label{color:#4338ca;font-weight:700}
+.theme-active-txt{margin-top:12px;font-size:11px;color:#aaa}
+.accent-row{display:flex;align-items:center;gap:12px}
+.accent-val{font-size:12px;font-weight:600}
+.accent-reset{font-size:10px;color:#6366f1;cursor:pointer;margin-top:2px}
+.accent-reset:hover{text-decoration:underline}
+
+/* Export bar */
+.export-bar{padding:14px 20px;border-top:1px solid #f0f0f0;display:flex;gap:8px;background:#fff}
+.btn-png{flex:1;padding:11px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;color:#555;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
+.btn-png:hover{background:#f8f9fa}
+.btn-pdf{flex:2;padding:11px;border-radius:8px;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:.3px;transition:opacity .15s}
+.btn-pdf:hover{opacity:.9}
+.btn-pdf:disabled,.btn-png:disabled{opacity:.5;cursor:not-allowed}
+
+/* Preview area */
+.preview-area{flex:1;background:#e8eaed;display:flex;flex-direction:column;overflow:hidden}
+.preview-header{padding:12px 22px;border-bottom:1px solid #d8dadc;display:flex;align-items:center;justify-content:space-between;background:#edeef0}
+.preview-label{font-size:10px;color:#999;letter-spacing:2px;font-weight:700}
+.live-dot-row{display:flex;align-items:center;gap:6px;font-size:10px;color:#aaa}
+.live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;display:inline-block;animation:blink 2s infinite}
+.preview-scroll{flex:1;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:28px 20px}
+.preview-shadow{box-shadow:0 20px 60px rgba(0,0,0,.18),0 4px 16px rgba(0,0,0,.1);transform:scale(.76);transform-origin:top center;border-radius:2px;overflow:hidden}
+
+/* Document */
+#doc{width:794px;min-height:1123px;position:relative;overflow:hidden}
+.doc-accent-bar{height:5px;width:100%}
+.doc-header{padding:40px 52px 32px}
+.doc-header-inner{display:flex;justify-content:space-between;align-items:flex-start}
+.doc-left{flex:1}
+#doc-logo-img{max-height:52px;max-width:160px;margin-bottom:14px;display:block}
+.doc-biz-name{font-size:34px;font-weight:700;line-height:1.1;margin-bottom:4px;letter-spacing:-.5px}
+.doc-address{font-size:11px;line-height:1.7;margin-top:4px;white-space:pre-line}
+.doc-right{text-align:right;min-width:170px}
+.doc-pl-label{font-size:11px;letter-spacing:3px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.doc-contact{font-size:11px;line-height:1.9;white-space:pre-line}
+.doc-body{padding:24px 52px 90px}
+.doc-footer{position:absolute;bottom:0;left:0;right:0;padding:18px 52px 26px}
+.doc-footer-inner{display:flex;justify-content:space-between}
+.doc-footer-txt{font-size:9px;letter-spacing:1.5px}
+
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:768px){
+  .app{flex-direction:column;height:auto;overflow:auto}
+  .sidebar{width:100%;min-width:unset}
+  .preview-area{min-height:600px}
+  body{height:auto;overflow:auto}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="brand-row">
+      <div class="brand-icon">✦</div>
+      <div>
+        <div class="brand-name">PriceSheet</div>
+        <div class="brand-tag">INSTANT PRICE LISTS</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('header',this)">Header</button>
+      <button class="tab" onclick="switchTab('items',this)" id="items-tab-btn">Items (0)</button>
+      <button class="tab" onclick="switchTab('design',this)">Design</button>
+    </div>
+  </div>
+
+  <div class="sidebar-body">
+
+    <!-- HEADER TAB -->
+    <div id="tab-header">
+      <div class="section">
+        <label class="lbl">Business Name</label>
+        <input class="inp" id="f-business" value="Godavari Tent Works" oninput="renderPreview()" placeholder="Your Business Name"/>
+      </div>
+      <div class="section">
+        <label class="lbl">Address</label>
+        <textarea class="tarea" id="f-address" oninput="renderPreview()" placeholder="Street, City, State, PIN">Chirala, Prakasam District&#10;Andhra Pradesh – 523157</textarea>
+      </div>
+      <div class="section">
+        <label class="lbl">Phone / Email</label>
+        <input class="inp" id="f-contact" value="9295756242" oninput="renderPreview()" placeholder="Phone or email"/>
+      </div>
+      <div class="section">
+        <label class="lbl">Currency</label>
+        <select class="sel" id="f-currency" onchange="renderPreview()">
+          <option value="INR" data-sym="₹" selected>INR – Indian Rupee</option>
+          <option value="USD" data-sym="$">USD – US Dollar</option>
+          <option value="EUR" data-sym="€">EUR – Euro</option>
+          <option value="GBP" data-sym="£">GBP – British Pound</option>
+          <option value="JPY" data-sym="¥">JPY – Japanese Yen</option>
+          <option value="AUD" data-sym="A$">AUD – Australian Dollar</option>
+          <option value="CAD" data-sym="C$">CAD – Canadian Dollar</option>
+          <option value="AED" data-sym="د.إ">AED – UAE Dirham</option>
+          <option value="SGD" data-sym="S$">SGD – Singapore Dollar</option>
+        </select>
+      </div>
+      <div class="section">
+        <label class="lbl">Logo (Optional)</label>
+        <div id="logo-no">
+          <label class="logo-upload-label">
+            <span style="font-size:22px">🖼</span>
+            <span style="font-size:12px;font-weight:600;color:#555">Upload Logo</span>
+            <span style="font-size:10px;color:#bbb">PNG · SVG · JPG · WEBP</span>
+            <input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/>
+          </label>
+        </div>
+        <div id="logo-yes" style="display:none">
+          <div class="logo-preview-box">
+            <img id="logo-preview-img" src="" alt="logo"/>
+            <div class="logo-actions">
+              <label class="btn-change">Change<input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/></label>
+              <button class="btn-remove-logo" onclick="removeLogo()">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEMS TAB -->
+    <div id="tab-items" style="display:none">
+      <p class="hint">💡 Each item can have multiple variants (e.g. Small / Medium / Large) — each with its own price. Variant columns auto-appear in the document.</p>
+      <div id="items-list"></div>
+      <button class="btn-add" onclick="addItem()">
+        <span style="font-size:16px;line-height:1">+</span> Add Item
+      </button>
+    </div>
+
+    <!-- DESIGN TAB -->
+    <div id="tab-design" style="display:none">
+      <div class="section">
+        <label class="lbl">List Layout</label>
+        <div class="layout-grid" id="layout-grid"></div>
+      </div>
+      <div class="section">
+        <label class="lbl">Color Theme</label>
+        <div class="theme-swatches" id="theme-swatches"></div>
+        <div class="theme-active-txt">Active: <span id="active-theme-name" style="font-weight:700"></span></div>
+      </div>
+      <div class="section">
+        <label class="lbl">Custom Accent Color</label>
+        <div class="accent-row">
+          <input type="color" id="accent-picker" style="width:40px;height:40px;border-radius:8px;border:1.5px solid #e5e7eb;cursor:pointer;padding:2px" oninput="onAccentChange(this.value)"/>
+          <div>
+            <div class="accent-val" id="accent-val-txt"></div>
+            <div class="accent-reset" id="accent-reset-btn" style="display:none" onclick="resetAccent()">Reset to theme default</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sidebar-body -->
+
+  <div class="export-bar">
+    <button class="btn-png" id="btn-png" onclick="exportDoc('png')">🖼 PNG</button>
+    <button class="btn-pdf" id="btn-pdf" onclick="exportDoc('pdf')">⬇ Download PDF</button>
+  </div>
+</div>
+
+<!-- ═══════════ PREVIEW ═══════════ -->
+<div class="preview-area">
+  <div class="preview-header">
+    <span class="preview-label">LIVE PREVIEW</span>
+    <div class="live-dot-row"><span class="live-dot"></span> Auto-updating</div>
+  </div>
+  <div class="preview-scroll">
+    <div class="preview-shadow">
+      <div id="doc">
+        <div class="doc-accent-bar" id="doc-accent-bar"></div>
+        <div class="doc-header" id="doc-header">
+          <div class="doc-header-inner">
+            <div class="doc-left">
+              <img id="doc-logo-img" src="" alt="" style="display:none"/>
+              <div class="doc-biz-name" id="doc-biz-name"></div>
+              <div class="doc-address" id="doc-address"></div>
+            </div>
+            <div class="doc-right">
+              <div class="doc-pl-label" id="doc-pl-label">Price List</div>
+              <div class="doc-contact" id="doc-contact"></div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-body" id="doc-body"></div>
+        <div class="doc-footer" id="doc-footer">
+          <div class="doc-footer-inner">
+            <div class="doc-footer-txt" id="doc-footer-l"></div>
+            <div class="doc-footer-txt" id="doc-footer-r"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// ════════════════════════════════════
+// STATE
+// ════════════════════════════════════
+let logoDataUrl   = null;
+let currentLayout = 'table';
+let currentTheme  = 'classic';
+let customAccent  = '';
+let itemIdCounter = 20;
+let varIdCounter  = 200;
+let dragSrcIdx    = null;
+
+const THEMES = [
+  {id:'classic',name:'Classic White',bg:'#ffffff',text:'#1a1a1a',accent:'#1a1a2e'},
+  {id:'warm',   name:'Warm Paper',   bg:'#fdf6ec',text:'#2d1f0e',accent:'#b45309'},
+  {id:'slate',  name:'Slate Blue',   bg:'#f1f5f9',text:'#0f172a',accent:'#1d4ed8'},
+  {id:'sage',   name:'Sage Green',   bg:'#f0faf4',text:'#14352a',accent:'#15803d'},
+  {id:'rose',   name:'Rose',         bg:'#fff1f3',text:'#3b0a14',accent:'#be123c'},
+  {id:'noir',   name:'Noir Dark',    bg:'#111111',text:'#f0f0f0',accent:'#c9a84c'},
+];
+
+const LAYOUTS = [
+  {id:'table', name:'Table',      desc:'Classic rows + variant columns',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="6" rx="2" fill="currentColor" opacity=".5"/><rect x="2" y="11" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/><rect x="2" y="19" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/><rect x="2" y="27" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/></svg>'},
+  {id:'split', name:'Menu Style', desc:'Item name ···· price on same line',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="4" width="16" height="4" rx="2" fill="currentColor" opacity=".6"/><rect x="36" y="4" width="6" height="4" rx="2" fill="currentColor" opacity=".6"/><line x1="20" y1="6" x2="34" y2="6" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/><rect x="2" y="14" width="20" height="4" rx="2" fill="currentColor" opacity=".4"/><rect x="36" y="14" width="6" height="4" rx="2" fill="currentColor" opacity=".4"/><line x1="24" y1="16" x2="34" y2="16" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/><rect x="2" y="24" width="14" height="4" rx="2" fill="currentColor" opacity=".4"/><rect x="36" y="24" width="6" height="4" rx="2" fill="currentColor" opacity=".4"/><line x1="18" y1="26" x2="34" y2="26" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/></svg>'},
+  {id:'twocol',name:'Two Column', desc:'Items in a 2-column grid',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="24" y="2" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="2" y="19" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="24" y="19" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/></svg>'},
+  {id:'card',  name:'Card Stack', desc:'Each item in its own card block',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="9" rx="3" fill="currentColor" opacity=".35"/><rect x="2" y="14" width="40" height="9" rx="3" fill="currentColor" opacity=".35"/><rect x="2" y="26" width="40" height="6" rx="3" fill="currentColor" opacity=".35"/></svg>'},
+];
+
+// Default items — some with variants, some without
+let items = [
+  {id:1, name:'Shamiyana / Tent', desc:'', variants:[
+    {id:101,type:'20×30 ft', price:'5000'},
+    {id:102,type:'30×50 ft', price:'9000'},
+    {id:103,type:'40×60 ft', price:'14000'},
+  ]},
+  {id:2, name:'Plastic Chairs', desc:'', variants:[
+    {id:104,type:'Standard', price:'15'},
+    {id:105,type:'Premium',  price:'25'},
+  ]},
+  {id:3, name:'Round Tables', desc:'', variants:[
+    {id:106,type:'4 ft', price:'250'},
+    {id:107,type:'5 ft', price:'350'},
+  ]},
+  {id:4, name:'Flower Decoration', desc:'Full stage & mandap setup', variants:[
+    {id:108,type:'Basic',    price:'8000'},
+    {id:109,type:'Standard', price:'12000'},
+    {id:110,type:'Premium',  price:'20000'},
+  ]},
+  {id:5, name:'Generator', desc:'', variants:[
+    {id:111,type:'5 KVA',  price:'2500'},
+    {id:112,type:'10 KVA', price:'3500'},
+  ]},
+];
+
+// ════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function getCurrencySym(){const sel=document.getElementById('f-currency');return sel.options[sel.selectedIndex]?.getAttribute('data-sym')||'₹'}
+function fmtPrice(p){if(!p&&p!==0)return '';const n=parseFloat(p);if(isNaN(n))return String(p);return n%1===0?n.toLocaleString('en-IN'):n.toFixed(2)}
+
+// ════════════════════════════════════
+// TABS
+// ════════════════════════════════════
+function switchTab(name,btn){
+  ['header','items','design'].forEach(t=>document.getElementById('tab-'+t).style.display=t===name?'block':'none');
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ════════════════════════════════════
+// LOGO
+// ════════════════════════════════════
+function handleLogo(e){
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    logoDataUrl=ev.target.result;
+    document.getElementById('logo-no').style.display='none';
+    document.getElementById('logo-yes').style.display='block';
+    document.getElementById('logo-preview-img').src=logoDataUrl;
+    renderPreview();
+  };
+  r.readAsDataURL(file); e.target.value='';
+}
+function removeLogo(){
+  logoDataUrl=null;
+  document.getElementById('logo-no').style.display='block';
+  document.getElementById('logo-yes').style.display='none';
+  renderPreview();
+}
+
+// ════════════════════════════════════
+// ITEMS
+// ════════════════════════════════════
+function addItem(){
+  items.push({id:itemIdCounter++,name:'',desc:'',variants:[{id:varIdCounter++,type:'',price:''}]});
+  renderItemsList(); renderPreview();
+}
+function removeItem(id){
+  items=items.filter(it=>it.id!==id); renderItemsList(); renderPreview();
+}
+function updateItem(id,field,val){
+  const it=items.find(i=>i.id===id); if(it){it[field]=val; renderPreview();}
+}
+function addVariant(itemId){
+  const it=items.find(i=>i.id===itemId); if(!it) return;
+  it.variants.push({id:varIdCounter++,type:'',price:''});
+  renderItemsList(); renderPreview();
+}
+function removeVariant(itemId,varId){
+  const it=items.find(i=>i.id===itemId); if(!it) return;
+  if(it.variants.length<=1){alert('Each item must have at least one variant.');return;}
+  it.variants=it.variants.filter(v=>v.id!==varId);
+  renderItemsList(); renderPreview();
+}
+function updateVariant(itemId,varId,field,val){
+  const it=items.find(i=>i.id===itemId); if(!it) return;
+  const v=it.variants.find(v=>v.id===varId); if(!v) return;
+  v[field]=val; renderPreview();
+}
+
+function renderItemsList(){
+  const container=document.getElementById('items-list');
+  const sym=getCurrencySym();
+  container.innerHTML='';
+  items.forEach((item,idx)=>{
+    const div=document.createElement('div');
+    div.className='item-row'; div.draggable=true; div.dataset.idx=idx;
+
+    const varRows=item.variants.map(v=>`
+      <div class="variant-row" id="vrow-${v.id}">
+        <input class="item-inp variant-type-inp" placeholder="Type name (e.g. Small)" value="${esc(v.type)}"
+          oninput="updateVariant(${item.id},${v.id},'type',this.value)"/>
+        <div class="variant-price-wrap">
+          <span class="variant-price-sym">${sym}</span>
+          <input class="item-inp variant-price-inp" type="number" placeholder="Price" value="${esc(v.price)}"
+            oninput="updateVariant(${item.id},${v.id},'price',this.value)"/>
+        </div>
+        <button class="btn-remove-variant" onclick="removeVariant(${item.id},${v.id})" title="Remove variant">×</button>
+      </div>`).join('');
+
+    div.innerHTML=`
+      <button class="btn-remove-item" onclick="removeItem(${item.id})" title="Remove item">×</button>
+      <div class="item-name-row">
+        <span class="drag-handle">⠿</span>
+        <input class="item-inp" style="flex:1" placeholder="Item / Service name" value="${esc(item.name)}"
+          oninput="updateItem(${item.id},'name',this.value)"/>
+      </div>
+      <input class="item-inp" style="width:100%;margin-bottom:10px" placeholder="Description (optional)"
+        value="${esc(item.desc)}" oninput="updateItem(${item.id},'desc',this.value)"/>
+      <div class="variant-section">
+        <div class="variant-label-row">
+          <span class="variant-lbl">⚡ Variants &amp; Prices</span>
+          <button class="btn-add-variant" onclick="addVariant(${item.id})">+ Add Variant</button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 20px;gap:0 6px;margin-bottom:4px;padding:0 0 4px">
+          <span style="font-size:9px;color:#bbb;font-weight:700;letter-spacing:1px;text-transform:uppercase">TYPE / SIZE</span>
+          <span style="font-size:9px;color:#bbb;font-weight:700;letter-spacing:1px;text-transform:uppercase">PRICE</span>
+          <span></span>
+        </div>
+        ${varRows}
+      </div>`;
+
+    // Drag
+    div.addEventListener('dragstart',e=>{dragSrcIdx=idx;div.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+    div.addEventListener('dragend',()=>{dragSrcIdx=null;div.classList.remove('dragging');});
+    div.addEventListener('dragover',e=>{e.preventDefault();div.classList.add('drag-over');});
+    div.addEventListener('dragleave',()=>div.classList.remove('drag-over'));
+    div.addEventListener('drop',e=>{
+      e.preventDefault();div.classList.remove('drag-over');
+      if(dragSrcIdx===null||dragSrcIdx===idx)return;
+      const moved=items.splice(dragSrcIdx,1)[0];
+      items.splice(idx,0,moved);
+      renderItemsList();renderPreview();
+    });
+    container.appendChild(div);
+  });
+  document.getElementById('items-tab-btn').textContent=`Items (${items.length})`;
+}
+
+// ════════════════════════════════════
+// DESIGN
+// ════════════════════════════════════
+function buildLayoutGrid(){
+  const g=document.getElementById('layout-grid');
+  LAYOUTS.forEach(l=>{
+    const d=document.createElement('div');
+    d.className='layout-card'+(l.id===currentLayout?' active':'');
+    d.id='lc-'+l.id;
+    d.innerHTML=`${l.svg}<div class="lc-name">${l.name}</div><div class="lc-desc">${l.desc}</div>`;
+    d.onclick=()=>{currentLayout=l.id;document.querySelectorAll('.layout-card').forEach(c=>c.classList.remove('active'));d.classList.add('active');renderPreview();};
+    g.appendChild(d);
+  });
+}
+function buildThemeSwatches(){
+  const wrap=document.getElementById('theme-swatches');
+  THEMES.forEach(th=>{
+    const d=document.createElement('div'); d.className='theme-swatch'; d.id='ts-'+th.id;
+    d.innerHTML=`<div class="swatch-circle${th.id===currentTheme?' active':''}" style="background:${th.bg}" id="sc-${th.id}"><div class="swatch-pip" style="background:${th.accent}"></div></div><div class="swatch-label">${th.name.split(' ')[0]}</div>`;
+    d.onclick=()=>{currentTheme=th.id;customAccent='';updateThemeUI();renderPreview();};
+    wrap.appendChild(d);
+  });
+  updateThemeUI();
+}
+function updateThemeUI(){
+  const th=THEMES.find(t=>t.id===currentTheme);
+  document.querySelectorAll('.swatch-circle').forEach(c=>c.classList.remove('active'));
+  document.getElementById('sc-'+currentTheme)?.classList.add('active');
+  document.getElementById('active-theme-name').textContent=th.name;
+  document.getElementById('active-theme-name').style.color=th.accent;
+  const eff=customAccent||th.accent;
+  document.getElementById('accent-picker').value=eff;
+  document.getElementById('accent-val-txt').textContent=eff;
+  document.getElementById('accent-val-txt').style.color=eff;
+  document.getElementById('accent-reset-btn').style.display=customAccent?'block':'none';
+}
+function onAccentChange(val){customAccent=val;updateThemeUI();renderPreview();}
+function resetAccent(){customAccent='';updateThemeUI();renderPreview();}
+
+// ════════════════════════════════════
+// DOC THEME
+// ════════════════════════════════════
+function getDocTheme(){
+  const base=THEMES.find(t=>t.id===currentTheme)||THEMES[0];
+  const accent=customAccent||base.accent;
+  const dark=currentTheme==='noir';
+  const fontMap={
+    classic:{head:"'Josefin Sans',sans-serif",  body:"'Source Serif 4',Georgia,serif"},
+    warm:   {head:"'Playfair Display',serif",   body:"'Lora',serif"},
+    slate:  {head:"'DM Sans',sans-serif",       body:"'DM Sans',sans-serif"},
+    sage:   {head:"'Nunito',sans-serif",        body:"'Nunito',sans-serif"},
+    rose:   {head:"'Cormorant Garamond',serif", body:"'Cormorant Garamond',serif"},
+    noir:   {head:"'Playfair Display',serif",   body:"'DM Mono',monospace"},
+  };
+  const fonts=fontMap[currentTheme]||fontMap.classic;
+  return {
+    bg:base.bg, headerText:base.text, accent,
+    addressText: dark?'#888':'#777',
+    contactText: dark?'#666':'#888',
+    divider:     dark?'#2a2a2a':'#e5e7eb',
+    rowBg:       dark?'#1a1a1a':base.bg,
+    rowAlt:      dark?'#141414':(base.bg==='#ffffff'?'#f9fafb':base.bg),
+    rowBorder:   dark?'#252525':'#e8e8e8',
+    nameText:    dark?'#f0f0f0':base.text,
+    descText:    dark?'#666':'#999',
+    priceText:   accent,
+    varTypeText: dark?'#aaa':'#666',
+    colHeaderBg: dark?'#0d0d0d':(base.bg==='#ffffff'?'#f3f4f6':base.bg),
+    colHeaderText:dark?'#555':'#aaa',
+    varHeaderBg: dark?'#1f1f1f':(base.bg==='#ffffff'?'#e9ecf0':base.bg),
+    footerText:  dark?'#333':'#ccc',
+    fonts, dark,
+  };
+}
+
+// ════════════════════════════════════
+// RENDER PREVIEW
+// ════════════════════════════════════
+function renderPreview(){
+  const t=getDocTheme();
+  const sym=getCurrencySym();
+  const business=document.getElementById('f-business').value;
+  const address =document.getElementById('f-address').value;
+  const contact =document.getElementById('f-contact').value;
+  const currency=document.getElementById('f-currency').value;
+  const hasDesc=items.some(it=>it.desc&&it.desc.trim());
+
+  // Doc shell
+  const doc=document.getElementById('doc');
+  doc.style.background=t.bg; doc.style.fontFamily=t.fonts.body;
+
+  // Accent bar
+  document.getElementById('doc-accent-bar').style.background=t.accent;
+
+  // Header border
+  document.getElementById('doc-header').style.borderBottom=`1px solid ${t.divider}`;
+
+  // Logo
+  const li=document.getElementById('doc-logo-img');
+  if(logoDataUrl){li.src=logoDataUrl;li.style.display='block';}else li.style.display='none';
+
+  // Biz name
+  const bn=document.getElementById('doc-biz-name');
+  bn.textContent=business||'Business Name';
+  bn.style.color=t.headerText; bn.style.fontFamily=t.fonts.head;
+
+  // Address
+  const adEl=document.getElementById('doc-address');
+  adEl.textContent=address||'';
+  adEl.style.color=t.addressText;
+  adEl.style.display=address?'block':'none';
+
+  // Price list label
+  const pl=document.getElementById('doc-pl-label');
+  pl.style.color=t.accent; pl.style.fontFamily=t.fonts.head;
+
+  // Contact
+  const ce=document.getElementById('doc-contact');
+  ce.textContent=contact||''; ce.style.color=t.contactText;
+
+  // Footer
+  const cnt=items.length;
+  document.getElementById('doc-footer').style.borderTop=`1px solid ${t.divider}`;
+  document.getElementById('doc-footer-l').textContent=`${cnt} ITEM${cnt!==1?'S':''} · ${currency} · ${new Date().getFullYear()}`;
+  document.getElementById('doc-footer-l').style.color=t.footerText;
+  document.getElementById('doc-footer-r').textContent=business||'';
+  document.getElementById('doc-footer-r').style.color=t.footerText;
+
+  // Body
+  const body=document.getElementById('doc-body');
+  if(!items.length){
+    body.innerHTML=`<div style="text-align:center;padding:60px 0;color:${t.colHeaderText};font-size:13px">Add items to see them here</div>`;
+    return;
+  }
+  if(currentLayout==='table')       body.innerHTML=renderTable(items,t,sym,hasDesc);
+  else if(currentLayout==='split')  body.innerHTML=renderSplit(items,t,sym,hasDesc);
+  else if(currentLayout==='twocol') body.innerHTML=renderTwoCol(items,t,sym,hasDesc);
+  else                              body.innerHTML=renderCards(items,t,sym,hasDesc);
+}
+
+// ════════════════════════════════════
+// ── TABLE LAYOUT ──
+// Works out all unique variant type labels across all items,
+// adds one column per type. Items that don't have that type show "—".
+// ════════════════════════════════════
+function getVariantTypes(){
+  // Collect all distinct type names in order of first appearance
+  const seen=[]; const order=[];
+  items.forEach(it=>it.variants.forEach(v=>{
+    const k=(v.type||'').trim();
+    if(k&&!seen.includes(k)){seen.push(k);order.push(k);}
+  }));
+  return order; // e.g. ['Small','Medium','Large']
+}
+
+function renderTable(items,t,sym,hasDesc){
+  const types=getVariantTypes();
+  // If no named types, fall back to showing a single price column
+  const noTypes=types.length===0;
+
+  // Build column template: Item | [Desc] | type1 | type2 | ...  OR  Item | [Desc] | Price
+  const typeCols=noTypes?1:types.length;
+  const itemColFr=hasDesc?'1.3fr 1.5fr':'2fr';
+  const typeFrs=Array(typeCols).fill('100px').join(' ');
+  const cols=`${itemColFr} ${typeFrs}`;
+
+  let html=`<div style="display:grid;grid-template-columns:${cols};padding:11px 14px;background:${t.colHeaderBg};border-bottom:1px solid ${t.divider}">`;
+  html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHeaderText}">ITEM</div>`;
+  if(hasDesc) html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHeaderText}">DESCRIPTION</div>`;
+  if(noTypes){
+    html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHeaderText};text-align:right">PRICE</div>`;
+  } else {
+    types.forEach(tp=>{
+      html+=`<div style="font-size:9px;letter-spacing:1.5px;font-weight:700;color:${t.accent};text-align:right;text-transform:uppercase">${esc(tp)}</div>`;
+    });
+  }
+  html+='</div>';
+
+  items.forEach((item,i)=>{
+    html+=`<div style="display:grid;grid-template-columns:${cols};padding:14px 14px;background:${i%2===0?t.rowBg:t.rowAlt};border-bottom:1px solid ${t.rowBorder};align-items:center">`;
+    html+=`<div style="font-size:13px;font-weight:600;color:${t.nameText};padding-right:10px">${esc(item.name)||`Item ${i+1}`}</div>`;
+    if(hasDesc) html+=`<div style="font-size:11px;color:${t.descText};padding-right:10px;line-height:1.5">${esc(item.desc)||''}</div>`;
+    if(noTypes){
+      const p=item.variants[0]?.price||'';
+      html+=`<div style="font-size:15px;font-weight:700;color:${t.priceText};text-align:right">${p?sym+fmtPrice(p):'—'}</div>`;
+    } else {
+      types.forEach(tp=>{
+        const v=item.variants.find(v=>(v.type||'').trim()===tp);
+        const p=v?.price||'';
+        html+=`<div style="font-size:14px;font-weight:700;color:${t.priceText};text-align:right">${p?sym+fmtPrice(p):'—'}</div>`;
+      });
+    }
+    html+='</div>';
+  });
+  return html;
+}
+
+// ════════════════════════════════════
+// ── SPLIT / MENU LAYOUT ──
+// Shows each variant on its own dot-leader line indented under the item name
+// ════════════════════════════════════
+function renderSplit(items,t,sym,hasDesc){
+  let html='<div style="padding:0 6px">';
+  items.forEach((item,i)=>{
+    html+=`<div style="margin-bottom:${hasDesc&&item.desc?'20px':'14px'}">`;
+    // Item name header row
+    html+=`<div style="font-size:14px;font-weight:700;color:${t.nameText};margin-bottom:${item.variants.length>1?'8px':'4px'}">${esc(item.name)||`Item ${i+1}`}</div>`;
+    if(hasDesc&&item.desc) html+=`<div style="font-size:11px;color:${t.descText};margin-bottom:8px;padding-left:2px">${esc(item.desc)}</div>`;
+    // Variant lines
+    item.variants.forEach(v=>{
+      const label=(v.type||'').trim();
+      const price=v.price?sym+fmtPrice(v.price):'—';
+      html+=`<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:5px;padding-left:${item.variants.length>1?'12px':'0'}">
+        ${label?`<span style="font-size:12px;font-weight:600;color:${t.varTypeText};white-space:nowrap;min-width:70px">${esc(label)}</span>`:''}
+        <span style="flex:1;border-bottom:1.5px dotted ${t.divider};margin-bottom:3px"></span>
+        <span style="font-size:14px;font-weight:700;color:${t.priceText};white-space:nowrap">${price}</span>
+      </div>`;
+    });
+    if(i<items.length-1) html+=`<div style="height:1px;background:${t.rowBorder};margin-top:10px"></div>`;
+    html+='</div>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ════════════════════════════════════
+// ── TWO COLUMN LAYOUT ──
+// Each item card shows its variants as a mini list
+// ════════════════════════════════════
+function renderTwoCol(items,t,sym,hasDesc){
+  let html='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
+  items.forEach((item,i)=>{
+    html+=`<div style="background:${i%2===0?t.rowBg:t.rowAlt};border:1px solid ${t.rowBorder};border-left:3px solid ${t.priceText};border-radius:4px;padding:14px 14px 12px">
+      <div style="font-size:13px;font-weight:700;color:${t.nameText};margin-bottom:${hasDesc&&item.desc?'5px':'8px'}">${esc(item.name)||`Item ${i+1}`}</div>
+      ${hasDesc&&item.desc?`<div style="font-size:10px;color:${t.descText};line-height:1.4;margin-bottom:8px">${esc(item.desc)}</div>`:''}`;
+    // Variant rows inside card
+    item.variants.forEach(v=>{
+      const label=(v.type||'').trim();
+      const price=v.price?sym+fmtPrice(v.price):'—';
+      html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px dotted ${t.rowBorder}">
+        <span style="font-size:11px;color:${t.varTypeText}">${label||'—'}</span>
+        <span style="font-size:13px;font-weight:700;color:${t.priceText}">${price}</span>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ════════════════════════════════════
+// ── CARD STACK LAYOUT ──
+// Full-width cards with inline variant chips
+// ════════════════════════════════════
+function renderCards(items,t,sym,hasDesc){
+  let html='<div style="display:flex;flex-direction:column;gap:10px">';
+  items.forEach(item=>{
+    html+=`<div style="background:${t.rowBg};border:1px solid ${t.rowBorder};border-radius:6px;padding:16px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:${hasDesc&&item.desc?'6px':'10px'}">
+        <div style="font-size:14px;font-weight:700;color:${t.nameText}">${esc(item.name)||'—'}</div>
+        ${item.variants.length===1?`<div style="font-size:17px;font-weight:800;color:${t.priceText}">${item.variants[0].price?sym+fmtPrice(item.variants[0].price):'—'}</div>`:''}
+      </div>
+      ${hasDesc&&item.desc?`<div style="font-size:11px;color:${t.descText};line-height:1.5;margin-bottom:10px">${esc(item.desc)}</div>`:''}`;
+    // Multi-variant chips
+    if(item.variants.length>1){
+      html+='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">';
+      item.variants.forEach(v=>{
+        const label=(v.type||'').trim();
+        const price=v.price?sym+fmtPrice(v.price):'—';
+        html+=`<div style="background:${t.colHeaderBg};border:1px solid ${t.rowBorder};border-radius:5px;padding:5px 10px;display:flex;flex-direction:column;align-items:center;min-width:70px">
+          ${label?`<span style="font-size:9px;color:${t.varTypeText};font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px">${esc(label)}</span>`:''}
+          <span style="font-size:14px;font-weight:700;color:${t.priceText}">${price}</span>
+        </div>`;
+      });
+      html+='</div>';
+    }
+    html+='</div>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ════════════════════════════════════
+// EXPORT
+// ════════════════════════════════════
+async function loadScript(src){
+  return new Promise((res,rej)=>{
+    if(document.querySelector(`script[src="${src}"]`))return res();
+    const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);
+  });
+}
+async function exportDoc(type){
+  const pb=document.getElementById('btn-pdf'),nb=document.getElementById('btn-png');
+  pb.disabled=nb.disabled=true;
+  type==='pdf'?pb.textContent='⏳ Generating...':nb.textContent='⏳ Exporting...';
+  try{
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+    if(type==='pdf') await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+    const shadow=document.querySelector('.preview-shadow');
+    const orig=shadow.style.transform; shadow.style.transform='none';
+    const canvas=await html2canvas(document.getElementById('doc'),{scale:2,useCORS:true,backgroundColor:null,logging:false});
+    shadow.style.transform=orig;
+    const biz=document.getElementById('f-business').value||'price-list';
+    if(type==='pdf'){
+      const {jsPDF}=window.jspdf;
+      const pdf=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
+      const w=pdf.internal.pageSize.getWidth();
+      pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,w,(canvas.height*w)/canvas.width);
+      pdf.save(biz+'.pdf');
+    } else {
+      const a=document.createElement('a');a.download=biz+'.png';a.href=canvas.toDataURL('image/png');a.click();
+    }
+  }catch(err){alert('Export failed. Please try again.');console.error(err);}
+  finally{
+    pb.disabled=nb.disabled=false;
+    pb.textContent='⬇ Download PDF'; nb.textContent='🖼 PNG';
+  }
+}
+
+// ════════════════════════════════════
+// INIT
+// ════════════════════════════════════
+function init(){buildLayoutGrid();buildThemeSwatches();renderItemsList();renderPreview();}
+init();
+</script>
+</body>
+</html>
