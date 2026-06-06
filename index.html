@@ -250,6 +250,17 @@ Andhra Pradesh – 523157</textarea>
         • Items with <b>no variants</b> (single price) appear as a flat row spanning all columns.
       </div>
 
+      <!-- Description toggle -->
+      <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid #e5e7eb;border-radius:8px;padding:10px 14px;margin-bottom:16px">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:#374151">Show Description Field</div>
+          <div style="font-size:10px;color:#9ca3af;margin-top:1px">Add a short note below each item name</div>
+        </div>
+        <div id="desc-toggle" onclick="toggleDesc()" style="width:42px;height:24px;border-radius:12px;background:#e5e7eb;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0">
+          <div id="desc-toggle-knob" style="position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s"></div>
+        </div>
+      </div>
+
       <!-- Global types manager -->
       <div class="global-types-box">
         <div class="gt-title">🌐 Global Type Columns</div>
@@ -345,6 +356,7 @@ let idc = 100; // item id counter
 let vdc = 500; // variant id counter
 let gtc = 900; // global type id counter
 let dragSrcIdx = null;
+let showDesc   = false; // descriptions hidden by default
 
 // Global types — shared columns all "global" items use
 let globalTypes = [
@@ -360,7 +372,7 @@ let globalTypes = [
 */
 let items = [
   // Example item — Shamiyana/Tent with sizes (global)
-  {id:1, name:'Shamiyana / Tent', desc:'Weather-proof shamiyana with poles & ropes', variantMode:'global',
+  {id:1, name:'Shamiyana / Tent', desc:'', variantMode:'global',
    variants:[ {id:501,type:'20×30 ft',price:'5000'}, {id:502,type:'30×50 ft',price:'9000'}, {id:503,type:'40×60 ft',price:'14000'} ],
    singlePrice:''},
 
@@ -374,7 +386,7 @@ let items = [
    singlePrice:''},
 
   // Item with no variants — flat price
-  {id:4, name:'LED Stage Lights', desc:'Full stage lighting setup', variantMode:'none',
+  {id:4, name:'LED Stage Lights', desc:'', variantMode:'none',
    variants:[], singlePrice:'8000'},
 
   {id:5, name:'Generator', desc:'', variantMode:'custom',
@@ -434,6 +446,19 @@ function handleLogo(e){
   r.readAsDataURL(f); e.target.value='';
 }
 function removeLogo(){ logoDataUrl=null; document.getElementById('logo-no').style.display='block'; document.getElementById('logo-yes').style.display='none'; renderPreview(); }
+
+// ─────────────────────────────────────────────
+// DESCRIPTION TOGGLE
+// ─────────────────────────────────────────────
+function toggleDesc(){
+  showDesc=!showDesc;
+  const track=document.getElementById('desc-toggle');
+  const knob=document.getElementById('desc-toggle-knob');
+  track.style.background = showDesc ? '#6366f1' : '#e5e7eb';
+  knob.style.left = showDesc ? '21px' : '3px';
+  renderItemsList();
+  renderPreview();
+}
 
 // ─────────────────────────────────────────────
 // GLOBAL TYPES
@@ -580,7 +605,7 @@ function renderItemsList(){
           oninput="updateItemField(${item.id},'name',this.value)"/>
         ${badge}
       </div>
-      <input class="item-inp" style="width:100%;margin-bottom:8px" placeholder="Description (optional)"
+      <input class="item-inp" style="width:100%;margin-bottom:8px;display:${showDesc?'block':'none'}" placeholder="Description (optional)"
         value="${esc(item.desc)}" oninput="updateItemField(${item.id},'desc',this.value)"/>
       <div class="vmode-row">${modeHTML}</div>
       ${varBody}`;
@@ -692,7 +717,7 @@ function renderPreview(){
   const address =document.getElementById('f-address').value;
   const contact =document.getElementById('f-contact').value;
   const currency=document.getElementById('f-currency').value;
-  const hasDesc =items.some(it=>it.desc&&it.desc.trim());
+  const hasDesc = showDesc && items.some(it=>it.desc&&it.desc.trim());
 
   const doc=document.getElementById('doc');
   doc.style.background=t.bg; doc.style.fontFamily=t.fonts.b;
