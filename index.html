@@ -7,24 +7,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Josefin+Sans:wght@400;600;700&family=Source+Serif+4:wght@400;600&family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;600&family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ── Reset ── */
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:#f0f2f5;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+body{font-family:'Inter',system-ui,sans-serif;background:#f0f2f5;height:100vh;overflow:hidden}
 input,select,textarea,button{font-family:inherit}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:#f0f2f5}
 ::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:4px}
-.app{display:flex;height:100vh;overflow:hidden}
 
-/* Sidebar */
-.sidebar{width:420px;min-width:320px;background:#fff;border-right:1px solid #e5e7eb;display:flex;flex-direction:column;overflow:hidden;box-shadow:2px 0 12px rgba(0,0,0,.04)}
-.sidebar-top{padding:18px 20px 0;border-bottom:1px solid #f0f0f0}
+/* ── Shell ── */
+.app{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:440px;min-width:320px;background:#fff;border-right:1px solid #e5e7eb;display:flex;flex-direction:column;overflow:hidden;box-shadow:2px 0 12px rgba(0,0,0,.04)}
+.sidebar-top{padding:18px 20px 0;border-bottom:1px solid #f0f0f0;flex-shrink:0}
 .brand-row{display:flex;align-items:center;gap:10px;margin-bottom:18px}
 .brand-icon{width:32px;height:32px;background:linear-gradient(135deg,#6366f1,#a78bfa);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;flex-shrink:0}
 .brand-name{font-size:14px;font-weight:700;color:#111;letter-spacing:-.3px}
 .brand-tag{font-size:10px;color:#aaa;letter-spacing:.5px}
 .tabs{display:flex}
-.tab{flex:1;padding:10px 4px;text-align:center;font-size:11px;font-weight:500;color:#9ca3af;border:none;border-bottom:2px solid transparent;cursor:pointer;letter-spacing:.3px;transition:all .15s;background:none}
+.tab{flex:1;padding:10px 4px;text-align:center;font-size:11px;font-weight:500;color:#9ca3af;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .15s;background:none}
 .tab.active{font-weight:700;color:#6366f1;border-bottom-color:#6366f1}
 .sidebar-body{flex:1;overflow-y:auto;padding:20px;background:#fafafa}
 .section{margin-bottom:22px}
@@ -35,7 +36,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .tarea:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.08)}
 .sel{width:100%;background:#fff;border:1.5px solid #e5e7eb;border-radius:8px;padding:9px 36px 9px 13px;color:#111;font-size:13px;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 .sel:focus{border-color:#6366f1}
-.inp-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
 /* Logo */
 .logo-upload-label{display:flex;flex-direction:column;align-items:center;gap:6px;background:#f8f9fa;border:1.5px dashed #d1d5db;border-radius:8px;padding:20px;cursor:pointer;transition:border-color .15s}
@@ -46,34 +46,56 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .btn-change{padding:6px 14px;background:#fff;border:1.5px solid #e5e7eb;border-radius:6px;font-size:11px;color:#555;cursor:pointer;font-weight:600}
 .btn-remove-logo{padding:6px 14px;background:#fff;border:1.5px solid #fca5a5;border-radius:6px;font-size:11px;color:#ef4444;cursor:pointer;font-weight:600}
 
-/* Item rows */
-.hint{font-size:11px;color:#bbb;margin-bottom:14px;line-height:1.5;background:#f0f4ff;border:1px solid #e0e7ff;border-radius:6px;padding:8px 10px;color:#6366f1}
+/* Items */
+.hint-box{font-size:11px;line-height:1.6;background:#f0f4ff;border:1px solid #e0e7ff;border-radius:7px;padding:9px 12px;color:#4f46e5;margin-bottom:14px}
 .item-row{background:#fff;border:1.5px solid #e5e7eb;border-radius:10px;padding:13px 14px;margin-bottom:10px;position:relative}
 .item-row.drag-over{border-color:#6366f1;background:#f5f3ff}
 .item-row.dragging{opacity:.4}
 .drag-handle{color:#ccc;font-size:14px;margin-right:8px;user-select:none;flex-shrink:0;cursor:grab}
-.item-name-row{display:flex;align-items:center;margin-bottom:8px}
 .item-inp{background:#f8f9fa;border:1.5px solid #eee;border-radius:6px;padding:7px 10px;color:#111;font-size:12px;outline:none;width:100%}
 .item-inp:focus{border-color:#6366f1}
+.item-name-row{display:flex;align-items:center;margin-bottom:8px}
 .btn-remove-item{position:absolute;top:10px;right:10px;background:none;border:none;color:#ddd;cursor:pointer;font-size:18px;line-height:1;padding:2px;transition:color .15s}
 .btn-remove-item:hover{color:#ef4444}
 .btn-add{width:100%;background:transparent;border:1.5px dashed #d1d5db;border-radius:8px;padding:11px;color:#9ca3af;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
 .btn-add:hover{border-color:#6366f1;color:#6366f1}
 
-/* Variant section inside item */
-.variant-section{margin-top:8px;background:#f8f9fa;border:1px solid #e8e8e8;border-radius:7px;padding:10px 10px 6px}
-.variant-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+/* Variant mode toggle */
+.vmode-row{display:flex;gap:6px;margin-bottom:10px}
+.vmode-btn{flex:1;padding:6px 4px;font-size:10px;font-weight:600;border-radius:6px;border:1.5px solid #e5e7eb;background:#f8f9fa;color:#888;cursor:pointer;transition:all .15s;text-align:center}
+.vmode-btn.active{background:#eef2ff;border-color:#6366f1;color:#4338ca}
+
+/* Variant section */
+.variant-section{background:#f8f9fa;border:1px solid #e8e8e8;border-radius:7px;padding:10px 10px 6px}
+.variant-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
 .variant-lbl{font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase}
-.btn-add-variant{background:#eef2ff;border:1px solid #c7d2fe;border-radius:5px;color:#6366f1;font-size:10px;font-weight:700;padding:3px 9px;cursor:pointer;transition:all .15s}
+.btn-add-variant{background:#eef2ff;border:1px solid #c7d2fe;border-radius:5px;color:#6366f1;font-size:10px;font-weight:700;padding:3px 9px;cursor:pointer}
 .btn-add-variant:hover{background:#e0e7ff}
+.variant-col-hdr{display:grid;grid-template-columns:1fr 1fr 20px;gap:6px;margin-bottom:4px}
+.vcol-lbl{font-size:9px;color:#bbb;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .variant-row{display:flex;gap:6px;margin-bottom:6px;align-items:center}
-.variant-type-inp{flex:1.2}
-.variant-price-wrap{flex:1;position:relative}
-.variant-price-sym{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px;pointer-events:none}
-.variant-price-inp{padding-left:18px!important}
-.btn-remove-variant{background:none;border:none;color:#ddd;cursor:pointer;font-size:15px;padding:0 2px;flex-shrink:0;transition:color .15s}
-.btn-remove-variant:hover{color:#ef4444}
-.no-variant-hint{font-size:11px;color:#bbb;text-align:center;padding:4px 0 2px}
+.vtype-inp{flex:1.2}
+.vprice-wrap{flex:1;position:relative}
+.vprice-sym{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px;pointer-events:none}
+.vprice-inp{padding-left:18px!important}
+.btn-rm-var{background:none;border:none;color:#ddd;cursor:pointer;font-size:15px;padding:0 2px;flex-shrink:0;transition:color .15s}
+.btn-rm-var:hover{color:#ef4444}
+
+/* global-type badge in item header */
+.global-badge{display:inline-block;font-size:9px;font-weight:700;color:#15803d;background:#dcfce7;border:1px solid #bbf7d0;border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:middle;letter-spacing:.5px}
+.custom-badge{display:inline-block;font-size:9px;font-weight:700;color:#7c3aed;background:#ede9fe;border:1px solid #ddd6fe;border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:middle;letter-spacing:.5px}
+
+/* Global types manager */
+.global-types-box{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:8px;padding:12px 14px;margin-bottom:18px}
+.gt-title{font-size:10px;font-weight:700;color:#15803d;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.gt-row{display:flex;gap:6px;margin-bottom:6px;align-items:center}
+.gt-inp{background:#fff;border:1.5px solid #d1fae5;border-radius:6px;padding:6px 10px;color:#111;font-size:12px;outline:none;flex:1}
+.gt-inp:focus{border-color:#15803d}
+.btn-rm-gt{background:none;border:none;color:#ccc;cursor:pointer;font-size:16px;padding:0 2px;transition:color .15s}
+.btn-rm-gt:hover{color:#ef4444}
+.btn-add-gt{background:#dcfce7;border:1px dashed #86efac;border-radius:6px;padding:6px 12px;color:#15803d;font-size:11px;font-weight:700;cursor:pointer;width:100%;margin-top:2px}
+.btn-add-gt:hover{background:#bbf7d0}
+.gt-hint{font-size:10px;color:#86efac;margin-top:6px;font-style:italic}
 
 /* Layout picker */
 .layout-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -101,16 +123,16 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .accent-reset:hover{text-decoration:underline}
 
 /* Export bar */
-.export-bar{padding:14px 20px;border-top:1px solid #f0f0f0;display:flex;gap:8px;background:#fff}
+.export-bar{padding:14px 20px;border-top:1px solid #f0f0f0;display:flex;gap:8px;background:#fff;flex-shrink:0}
 .btn-png{flex:1;padding:11px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;color:#555;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
 .btn-png:hover{background:#f8f9fa}
 .btn-pdf{flex:2;padding:11px;border-radius:8px;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:.3px;transition:opacity .15s}
 .btn-pdf:hover{opacity:.9}
 .btn-pdf:disabled,.btn-png:disabled{opacity:.5;cursor:not-allowed}
 
-/* Preview area */
+/* Preview */
 .preview-area{flex:1;background:#e8eaed;display:flex;flex-direction:column;overflow:hidden}
-.preview-header{padding:12px 22px;border-bottom:1px solid #d8dadc;display:flex;align-items:center;justify-content:space-between;background:#edeef0}
+.preview-header{padding:12px 22px;border-bottom:1px solid #d8dadc;display:flex;align-items:center;justify-content:space-between;background:#edeef0;flex-shrink:0}
 .preview-label{font-size:10px;color:#999;letter-spacing:2px;font-weight:700}
 .live-dot-row{display:flex;align-items:center;gap:6px;font-size:10px;color:#aaa}
 .live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;display:inline-block;animation:blink 2s infinite}
@@ -125,7 +147,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .doc-left{flex:1}
 #doc-logo-img{max-height:52px;max-width:160px;margin-bottom:14px;display:block}
 .doc-biz-name{font-size:34px;font-weight:700;line-height:1.1;margin-bottom:4px;letter-spacing:-.5px}
-.doc-address{font-size:11px;line-height:1.7;margin-top:4px;white-space:pre-line}
+.doc-address{font-size:11px;line-height:1.7;margin-top:5px;white-space:pre-line}
 .doc-right{text-align:right;min-width:170px}
 .doc-pl-label{font-size:11px;letter-spacing:3px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
 .doc-contact{font-size:11px;line-height:1.9;white-space:pre-line}
@@ -135,10 +157,10 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .doc-footer-txt{font-size:9px;letter-spacing:1.5px}
 
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-@media(max-width:768px){
+@media(max-width:800px){
   .app{flex-direction:column;height:auto;overflow:auto}
   .sidebar{width:100%;min-width:unset}
-  .preview-area{min-height:600px}
+  .preview-area{min-height:640px}
   body{height:auto;overflow:auto}
 }
 </style>
@@ -146,7 +168,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <body>
 <div class="app">
 
-<!-- ═══════════ SIDEBAR ═══════════ -->
+<!-- ══════════════════════ SIDEBAR ══════════════════════ -->
 <div class="sidebar">
   <div class="sidebar-top">
     <div class="brand-row">
@@ -157,27 +179,28 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       </div>
     </div>
     <div class="tabs">
-      <button class="tab active" onclick="switchTab('header',this)">Header</button>
-      <button class="tab" onclick="switchTab('items',this)" id="items-tab-btn">Items (0)</button>
+      <button class="tab active"  onclick="switchTab('header',this)">Header</button>
+      <button class="tab" id="items-tab-btn" onclick="switchTab('items',this)">Items (0)</button>
       <button class="tab" onclick="switchTab('design',this)">Design</button>
     </div>
   </div>
 
   <div class="sidebar-body">
 
-    <!-- HEADER TAB -->
+    <!-- ── HEADER TAB ── -->
     <div id="tab-header">
       <div class="section">
         <label class="lbl">Business Name</label>
-        <input class="inp" id="f-business" value="Godavari Tent Works" oninput="renderPreview()" placeholder="Your Business Name"/>
+        <input class="inp" id="f-business" value="Godavari Tent Works" oninput="renderPreview()"/>
       </div>
       <div class="section">
         <label class="lbl">Address</label>
-        <textarea class="tarea" id="f-address" oninput="renderPreview()" placeholder="Street, City, State, PIN">Chirala, Prakasam District&#10;Andhra Pradesh – 523157</textarea>
+        <textarea class="tarea" id="f-address" oninput="renderPreview()" placeholder="Street, City, State, PIN">Chirala, Prakasam District
+Andhra Pradesh – 523157</textarea>
       </div>
       <div class="section">
         <label class="lbl">Phone / Email</label>
-        <input class="inp" id="f-contact" value="9295756242" oninput="renderPreview()" placeholder="Phone or email"/>
+        <input class="inp" id="f-contact" value="9295756242" oninput="renderPreview()"/>
       </div>
       <div class="section">
         <label class="lbl">Currency</label>
@@ -207,24 +230,41 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           <div class="logo-preview-box">
             <img id="logo-preview-img" src="" alt="logo"/>
             <div class="logo-actions">
-              <label class="btn-change">Change<input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/></label>
+              <label class="btn-change">Change
+                <input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/>
+              </label>
               <button class="btn-remove-logo" onclick="removeLogo()">Remove</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /tab-header -->
 
-    <!-- ITEMS TAB -->
+    <!-- ── ITEMS TAB ── -->
     <div id="tab-items" style="display:none">
-      <p class="hint">💡 Each item can have multiple variants (e.g. Small / Medium / Large) — each with its own price. Variant columns auto-appear in the document.</p>
+
+      <div class="hint-box">
+        <b>How variants work:</b><br>
+        • <b>Global types</b> — set shared type columns once (e.g. Small / Medium / Large), all items use them automatically.<br>
+        • <b>Custom types</b> — override types for a specific item with its own columns.<br>
+        • Items with <b>no variants</b> (single price) appear as a flat row spanning all columns.
+      </div>
+
+      <!-- Global types manager -->
+      <div class="global-types-box">
+        <div class="gt-title">🌐 Global Type Columns</div>
+        <div id="global-types-list"></div>
+        <button class="btn-add-gt" onclick="addGlobalType()">+ Add Type Column</button>
+        <div class="gt-hint">These columns appear for all items set to "Global"</div>
+      </div>
+
       <div id="items-list"></div>
       <button class="btn-add" onclick="addItem()">
         <span style="font-size:16px;line-height:1">+</span> Add Item
       </button>
-    </div>
+    </div><!-- /tab-items -->
 
-    <!-- DESIGN TAB -->
+    <!-- ── DESIGN TAB ── -->
     <div id="tab-design" style="display:none">
       <div class="section">
         <label class="lbl">List Layout</label>
@@ -245,7 +285,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /tab-design -->
 
   </div><!-- /sidebar-body -->
 
@@ -253,9 +293,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <button class="btn-png" id="btn-png" onclick="exportDoc('png')">🖼 PNG</button>
     <button class="btn-pdf" id="btn-pdf" onclick="exportDoc('pdf')">⬇ Download PDF</button>
   </div>
-</div>
+</div><!-- /sidebar -->
 
-<!-- ═══════════ PREVIEW ═══════════ -->
+<!-- ══════════════════════ PREVIEW ══════════════════════ -->
 <div class="preview-area">
   <div class="preview-header">
     <span class="preview-label">LIVE PREVIEW</span>
@@ -269,12 +309,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           <div class="doc-header-inner">
             <div class="doc-left">
               <img id="doc-logo-img" src="" alt="" style="display:none"/>
-              <div class="doc-biz-name" id="doc-biz-name"></div>
-              <div class="doc-address" id="doc-address"></div>
+              <div class="doc-biz-name"  id="doc-biz-name"></div>
+              <div class="doc-address"   id="doc-address" style="display:none"></div>
             </div>
             <div class="doc-right">
-              <div class="doc-pl-label" id="doc-pl-label">Price List</div>
-              <div class="doc-contact" id="doc-contact"></div>
+              <div class="doc-pl-label"  id="doc-pl-label">Price List</div>
+              <div class="doc-contact"   id="doc-contact"></div>
             </div>
           </div>
         </div>
@@ -292,17 +332,55 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
 </div><!-- /app -->
 
+<!-- ═══════════════════════ SCRIPT ═══════════════════════ -->
 <script>
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // STATE
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 let logoDataUrl   = null;
 let currentLayout = 'table';
 let currentTheme  = 'classic';
 let customAccent  = '';
-let itemIdCounter = 20;
-let varIdCounter  = 200;
-let dragSrcIdx    = null;
+let idc = 100; // item id counter
+let vdc = 500; // variant id counter
+let gtc = 900; // global type id counter
+let dragSrcIdx = null;
+
+// Global types — shared columns all "global" items use
+let globalTypes = [
+  {id:901, label:'20×30 ft'},
+  {id:902, label:'30×50 ft'},
+  {id:903, label:'40×60 ft'},
+];
+
+/* variantMode: 'none' | 'global' | 'custom'
+   - none:   single flat price, no type columns
+   - global: uses globalTypes columns
+   - custom: item defines its own type columns
+*/
+let items = [
+  // Example item — Shamiyana/Tent with sizes (global)
+  {id:1, name:'Shamiyana / Tent', desc:'Weather-proof shamiyana with poles & ropes', variantMode:'global',
+   variants:[ {id:501,type:'20×30 ft',price:'5000'}, {id:502,type:'30×50 ft',price:'9000'}, {id:503,type:'40×60 ft',price:'14000'} ],
+   singlePrice:''},
+
+  // Items with custom types
+  {id:2, name:'Plastic Chairs', desc:'', variantMode:'custom',
+   variants:[ {id:504,type:'Standard',price:'15'}, {id:505,type:'Premium',price:'25'} ],
+   singlePrice:''},
+
+  {id:3, name:'Round Tables', desc:'', variantMode:'custom',
+   variants:[ {id:506,type:'4 ft',price:'250'}, {id:507,type:'5 ft',price:'350'} ],
+   singlePrice:''},
+
+  // Item with no variants — flat price
+  {id:4, name:'LED Stage Lights', desc:'Full stage lighting setup', variantMode:'none',
+   variants:[], singlePrice:'8000'},
+
+  {id:5, name:'Generator', desc:'', variantMode:'custom',
+   variants:[ {id:508,type:'5 KVA',price:'2500'}, {id:509,type:'10 KVA',price:'3500'} ],
+   singlePrice:''},
+];
 
 const THEMES = [
   {id:'classic',name:'Classic White',bg:'#ffffff',text:'#1a1a1a',accent:'#1a1a2e'},
@@ -314,63 +392,37 @@ const THEMES = [
 ];
 
 const LAYOUTS = [
-  {id:'table', name:'Table',      desc:'Classic rows + variant columns',
+  {id:'table', name:'Table',      desc:'Classic rows + type columns',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="6" rx="2" fill="currentColor" opacity=".5"/><rect x="2" y="11" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/><rect x="2" y="19" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/><rect x="2" y="27" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/></svg>'},
   {id:'split', name:'Menu Style', desc:'Item name ···· price on same line',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="4" width="16" height="4" rx="2" fill="currentColor" opacity=".6"/><rect x="36" y="4" width="6" height="4" rx="2" fill="currentColor" opacity=".6"/><line x1="20" y1="6" x2="34" y2="6" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/><rect x="2" y="14" width="20" height="4" rx="2" fill="currentColor" opacity=".4"/><rect x="36" y="14" width="6" height="4" rx="2" fill="currentColor" opacity=".4"/><line x1="24" y1="16" x2="34" y2="16" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/><rect x="2" y="24" width="14" height="4" rx="2" fill="currentColor" opacity=".4"/><rect x="36" y="24" width="6" height="4" rx="2" fill="currentColor" opacity=".4"/><line x1="18" y1="26" x2="34" y2="26" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/></svg>'},
   {id:'twocol',name:'Two Column', desc:'Items in a 2-column grid',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="24" y="2" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="2" y="19" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="24" y="19" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/></svg>'},
-  {id:'card',  name:'Card Stack', desc:'Each item in its own card block',
+  {id:'card',  name:'Card Stack', desc:'Each item in its own card',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="9" rx="3" fill="currentColor" opacity=".35"/><rect x="2" y="14" width="40" height="9" rx="3" fill="currentColor" opacity=".35"/><rect x="2" y="26" width="40" height="6" rx="3" fill="currentColor" opacity=".35"/></svg>'},
 ];
 
-// Default items — some with variants, some without
-let items = [
-  {id:1, name:'Shamiyana / Tent', desc:'', variants:[
-    {id:101,type:'20×30 ft', price:'5000'},
-    {id:102,type:'30×50 ft', price:'9000'},
-    {id:103,type:'40×60 ft', price:'14000'},
-  ]},
-  {id:2, name:'Plastic Chairs', desc:'', variants:[
-    {id:104,type:'Standard', price:'15'},
-    {id:105,type:'Premium',  price:'25'},
-  ]},
-  {id:3, name:'Round Tables', desc:'', variants:[
-    {id:106,type:'4 ft', price:'250'},
-    {id:107,type:'5 ft', price:'350'},
-  ]},
-  {id:4, name:'Flower Decoration', desc:'Full stage & mandap setup', variants:[
-    {id:108,type:'Basic',    price:'8000'},
-    {id:109,type:'Standard', price:'12000'},
-    {id:110,type:'Premium',  price:'20000'},
-  ]},
-  {id:5, name:'Generator', desc:'', variants:[
-    {id:111,type:'5 KVA',  price:'2500'},
-    {id:112,type:'10 KVA', price:'3500'},
-  ]},
-];
-
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // HELPERS
-// ════════════════════════════════════
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function getCurrencySym(){const sel=document.getElementById('f-currency');return sel.options[sel.selectedIndex]?.getAttribute('data-sym')||'₹'}
-function fmtPrice(p){if(!p&&p!==0)return '';const n=parseFloat(p);if(isNaN(n))return String(p);return n%1===0?n.toLocaleString('en-IN'):n.toFixed(2)}
+// ─────────────────────────────────────────────
+const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const getCurrencySym = () => { const s=document.getElementById('f-currency'); return s.options[s.selectedIndex]?.getAttribute('data-sym')||'₹'; };
+const fmtPrice = p => { if(!p&&p!==0) return ''; const n=parseFloat(p); if(isNaN(n)) return String(p); return n%1===0?n.toLocaleString('en-IN'):n.toFixed(2); };
 
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // TABS
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 function switchTab(name,btn){
   ['header','items','design'].forEach(t=>document.getElementById('tab-'+t).style.display=t===name?'block':'none');
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
 
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // LOGO
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 function handleLogo(e){
-  const file=e.target.files[0]; if(!file) return;
+  const f=e.target.files[0]; if(!f) return;
   const r=new FileReader();
   r.onload=ev=>{
     logoDataUrl=ev.target.result;
@@ -379,36 +431,60 @@ function handleLogo(e){
     document.getElementById('logo-preview-img').src=logoDataUrl;
     renderPreview();
   };
-  r.readAsDataURL(file); e.target.value='';
+  r.readAsDataURL(f); e.target.value='';
 }
-function removeLogo(){
-  logoDataUrl=null;
-  document.getElementById('logo-no').style.display='block';
-  document.getElementById('logo-yes').style.display='none';
-  renderPreview();
+function removeLogo(){ logoDataUrl=null; document.getElementById('logo-no').style.display='block'; document.getElementById('logo-yes').style.display='none'; renderPreview(); }
+
+// ─────────────────────────────────────────────
+// GLOBAL TYPES
+// ─────────────────────────────────────────────
+function addGlobalType(){
+  globalTypes.push({id:gtc++, label:''});
+  renderGlobalTypes(); renderPreview();
+}
+function removeGlobalType(id){
+  globalTypes=globalTypes.filter(g=>g.id!==id);
+  renderGlobalTypes(); renderPreview();
+}
+function updateGlobalType(id,val){
+  const g=globalTypes.find(g=>g.id===id); if(g){ g.label=val; renderPreview(); }
+}
+function renderGlobalTypes(){
+  const c=document.getElementById('global-types-list');
+  c.innerHTML='';
+  globalTypes.forEach(g=>{
+    const d=document.createElement('div'); d.className='gt-row';
+    d.innerHTML=`<input class="gt-inp" placeholder="e.g. Small / 20×30 ft / Basic" value="${esc(g.label)}" oninput="updateGlobalType(${g.id},this.value)"/>
+      <button class="btn-rm-gt" onclick="removeGlobalType(${g.id})">×</button>`;
+    c.appendChild(d);
+  });
 }
 
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // ITEMS
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 function addItem(){
-  items.push({id:itemIdCounter++,name:'',desc:'',variants:[{id:varIdCounter++,type:'',price:''}]});
+  items.push({id:idc++,name:'',desc:'',variantMode:'global',variants:[],singlePrice:''});
   renderItemsList(); renderPreview();
 }
-function removeItem(id){
-  items=items.filter(it=>it.id!==id); renderItemsList(); renderPreview();
+function removeItem(id){ items=items.filter(i=>i.id!==id); renderItemsList(); renderPreview(); }
+function updateItemField(id,field,val){
+  const it=items.find(i=>i.id===id); if(it){ it[field]=val; renderPreview(); }
 }
-function updateItem(id,field,val){
-  const it=items.find(i=>i.id===id); if(it){it[field]=val; renderPreview();}
+function setVariantMode(id,mode){
+  const it=items.find(i=>i.id===id); if(!it) return;
+  it.variantMode=mode;
+  if(mode==='custom'&&it.variants.length===0) it.variants.push({id:vdc++,type:'',price:''});
+  renderItemsList(); renderPreview();
 }
 function addVariant(itemId){
   const it=items.find(i=>i.id===itemId); if(!it) return;
-  it.variants.push({id:varIdCounter++,type:'',price:''});
+  it.variants.push({id:vdc++,type:'',price:''});
   renderItemsList(); renderPreview();
 }
 function removeVariant(itemId,varId){
   const it=items.find(i=>i.id===itemId); if(!it) return;
-  if(it.variants.length<=1){alert('Each item must have at least one variant.');return;}
+  if(it.variants.length<=1){ alert('Need at least one variant.'); return; }
   it.variants=it.variants.filter(v=>v.id!==varId);
   renderItemsList(); renderPreview();
 }
@@ -419,46 +495,95 @@ function updateVariant(itemId,varId,field,val){
 }
 
 function renderItemsList(){
-  const container=document.getElementById('items-list');
+  const c=document.getElementById('items-list');
   const sym=getCurrencySym();
-  container.innerHTML='';
+  c.innerHTML='';
   items.forEach((item,idx)=>{
     const div=document.createElement('div');
     div.className='item-row'; div.draggable=true; div.dataset.idx=idx;
 
-    const varRows=item.variants.map(v=>`
-      <div class="variant-row" id="vrow-${v.id}">
-        <input class="item-inp variant-type-inp" placeholder="Type name (e.g. Small)" value="${esc(v.type)}"
-          oninput="updateVariant(${item.id},${v.id},'type',this.value)"/>
-        <div class="variant-price-wrap">
-          <span class="variant-price-sym">${sym}</span>
-          <input class="item-inp variant-price-inp" type="number" placeholder="Price" value="${esc(v.price)}"
-            oninput="updateVariant(${item.id},${v.id},'price',this.value)"/>
-        </div>
-        <button class="btn-remove-variant" onclick="removeVariant(${item.id},${v.id})" title="Remove variant">×</button>
-      </div>`).join('');
+    // Mode buttons
+    const modes=[
+      {id:'none',   label:'No Variants',     title:'Single flat price'},
+      {id:'global', label:'Global Types',    title:'Use shared type columns'},
+      {id:'custom', label:'Custom Types',    title:'This item has its own types'},
+    ];
+    const modeHTML=modes.map(m=>`<button class="vmode-btn${item.variantMode===m.id?' active':''}"
+      title="${m.title}" onclick="setVariantMode(${item.id},'${m.id}')">${m.label}</button>`).join('');
 
-    div.innerHTML=`
-      <button class="btn-remove-item" onclick="removeItem(${item.id})" title="Remove item">×</button>
-      <div class="item-name-row">
-        <span class="drag-handle">⠿</span>
-        <input class="item-inp" style="flex:1" placeholder="Item / Service name" value="${esc(item.name)}"
-          oninput="updateItem(${item.id},'name',this.value)"/>
-      </div>
-      <input class="item-inp" style="width:100%;margin-bottom:10px" placeholder="Description (optional)"
-        value="${esc(item.desc)}" oninput="updateItem(${item.id},'desc',this.value)"/>
-      <div class="variant-section">
-        <div class="variant-label-row">
-          <span class="variant-lbl">⚡ Variants &amp; Prices</span>
-          <button class="btn-add-variant" onclick="addVariant(${item.id})">+ Add Variant</button>
+    // Variant body based on mode
+    let varBody='';
+    if(item.variantMode==='none'){
+      varBody=`<div style="display:flex;align-items:center;gap:6px;margin-top:8px">
+        <span style="font-size:11px;color:#888;flex-shrink:0">Single Price:</span>
+        <div style="position:relative;flex:1">
+          <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px">${sym}</span>
+          <input class="item-inp" style="padding-left:18px" type="number" placeholder="0" value="${esc(item.singlePrice)}"
+            oninput="updateItemField(${item.id},'singlePrice',this.value)"/>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 20px;gap:0 6px;margin-bottom:4px;padding:0 0 4px">
-          <span style="font-size:9px;color:#bbb;font-weight:700;letter-spacing:1px;text-transform:uppercase">TYPE / SIZE</span>
-          <span style="font-size:9px;color:#bbb;font-weight:700;letter-spacing:1px;text-transform:uppercase">PRICE</span>
+      </div>`;
+    } else if(item.variantMode==='global'){
+      const gtLabels=globalTypes.map(g=>g.label||'?').join(' · ');
+      varBody=`<div style="margin-top:8px;padding:8px 10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px">
+        <div style="font-size:10px;font-weight:700;color:#15803d;letter-spacing:.5px;margin-bottom:6px">GLOBAL COLUMNS: ${esc(gtLabels)||'(none set)'}</div>
+        ${globalTypes.map(g=>{
+          const match=item.variants.find(v=>v.type===g.label);
+          const val=match?match.price:'';
+          const vid=match?match.id:null;
+          return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+            <span style="font-size:11px;color:#166534;min-width:90px;font-weight:600">${esc(g.label||'?')}</span>
+            <div style="position:relative;flex:1">
+              <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px">${sym}</span>
+              <input class="item-inp" style="padding-left:18px;background:#fff" type="number" placeholder="0"
+                value="${esc(val)}" oninput="setGlobalVariantPrice(${item.id},${g.id},'${esc(g.label)}',this.value)"/>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
+    } else { // custom
+      const varRows=item.variants.map(v=>`
+        <div class="variant-row">
+          <input class="item-inp vtype-inp" placeholder="Type name (e.g. Large)" value="${esc(v.type)}"
+            oninput="updateVariant(${item.id},${v.id},'type',this.value)"/>
+          <div class="vprice-wrap">
+            <span class="vprice-sym">${sym}</span>
+            <input class="item-inp vprice-inp" type="number" placeholder="Price" value="${esc(v.price)}"
+              oninput="updateVariant(${item.id},${v.id},'price',this.value)"/>
+          </div>
+          <button class="btn-rm-var" onclick="removeVariant(${item.id},${v.id})">×</button>
+        </div>`).join('');
+      varBody=`<div class="variant-section" style="margin-top:8px">
+        <div class="variant-header-row">
+          <span class="variant-lbl">Custom Types</span>
+          <button class="btn-add-variant" onclick="addVariant(${item.id})">+ Add Type</button>
+        </div>
+        <div class="variant-col-hdr">
+          <span class="vcol-lbl">TYPE / SIZE</span>
+          <span class="vcol-lbl">PRICE</span>
           <span></span>
         </div>
         ${varRows}
       </div>`;
+    }
+
+    const badge = item.variantMode==='global'
+      ? '<span class="global-badge">GLOBAL</span>'
+      : item.variantMode==='custom'
+      ? '<span class="custom-badge">CUSTOM</span>'
+      : '';
+
+    div.innerHTML=`
+      <button class="btn-remove-item" onclick="removeItem(${item.id})">×</button>
+      <div class="item-name-row">
+        <span class="drag-handle">⠿</span>
+        <input class="item-inp" style="flex:1" placeholder="Item / Service name" value="${esc(item.name)}"
+          oninput="updateItemField(${item.id},'name',this.value)"/>
+        ${badge}
+      </div>
+      <input class="item-inp" style="width:100%;margin-bottom:8px" placeholder="Description (optional)"
+        value="${esc(item.desc)}" oninput="updateItemField(${item.id},'desc',this.value)"/>
+      <div class="vmode-row">${modeHTML}</div>
+      ${varBody}`;
 
     // Drag
     div.addEventListener('dragstart',e=>{dragSrcIdx=idx;div.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
@@ -468,36 +593,41 @@ function renderItemsList(){
     div.addEventListener('drop',e=>{
       e.preventDefault();div.classList.remove('drag-over');
       if(dragSrcIdx===null||dragSrcIdx===idx)return;
-      const moved=items.splice(dragSrcIdx,1)[0];
-      items.splice(idx,0,moved);
-      renderItemsList();renderPreview();
+      const moved=items.splice(dragSrcIdx,1)[0]; items.splice(idx,0,moved);
+      renderItemsList(); renderPreview();
     });
-    container.appendChild(div);
+    c.appendChild(div);
   });
   document.getElementById('items-tab-btn').textContent=`Items (${items.length})`;
 }
 
-// ════════════════════════════════════
+// Set price for a global-type variant by matching label
+function setGlobalVariantPrice(itemId, gtId, gtLabel, price){
+  const it=items.find(i=>i.id===itemId); if(!it) return;
+  let v=it.variants.find(v=>v.type===gtLabel);
+  if(!v){ v={id:vdc++,type:gtLabel,price:''}; it.variants.push(v); }
+  v.price=price; renderPreview();
+}
+
+// ─────────────────────────────────────────────
 // DESIGN
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 function buildLayoutGrid(){
   const g=document.getElementById('layout-grid');
   LAYOUTS.forEach(l=>{
-    const d=document.createElement('div');
-    d.className='layout-card'+(l.id===currentLayout?' active':'');
-    d.id='lc-'+l.id;
+    const d=document.createElement('div'); d.className='layout-card'+(l.id===currentLayout?' active':''); d.id='lc-'+l.id;
     d.innerHTML=`${l.svg}<div class="lc-name">${l.name}</div><div class="lc-desc">${l.desc}</div>`;
     d.onclick=()=>{currentLayout=l.id;document.querySelectorAll('.layout-card').forEach(c=>c.classList.remove('active'));d.classList.add('active');renderPreview();};
     g.appendChild(d);
   });
 }
 function buildThemeSwatches(){
-  const wrap=document.getElementById('theme-swatches');
+  const w=document.getElementById('theme-swatches');
   THEMES.forEach(th=>{
     const d=document.createElement('div'); d.className='theme-swatch'; d.id='ts-'+th.id;
     d.innerHTML=`<div class="swatch-circle${th.id===currentTheme?' active':''}" style="background:${th.bg}" id="sc-${th.id}"><div class="swatch-pip" style="background:${th.accent}"></div></div><div class="swatch-label">${th.name.split(' ')[0]}</div>`;
     d.onclick=()=>{currentTheme=th.id;customAccent='';updateThemeUI();renderPreview();};
-    wrap.appendChild(d);
+    w.appendChild(d);
   });
   updateThemeUI();
 }
@@ -513,28 +643,28 @@ function updateThemeUI(){
   document.getElementById('accent-val-txt').style.color=eff;
   document.getElementById('accent-reset-btn').style.display=customAccent?'block':'none';
 }
-function onAccentChange(val){customAccent=val;updateThemeUI();renderPreview();}
+function onAccentChange(v){customAccent=v;updateThemeUI();renderPreview();}
 function resetAccent(){customAccent='';updateThemeUI();renderPreview();}
 
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // DOC THEME
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 function getDocTheme(){
   const base=THEMES.find(t=>t.id===currentTheme)||THEMES[0];
   const accent=customAccent||base.accent;
   const dark=currentTheme==='noir';
-  const fontMap={
-    classic:{head:"'Josefin Sans',sans-serif",  body:"'Source Serif 4',Georgia,serif"},
-    warm:   {head:"'Playfair Display',serif",   body:"'Lora',serif"},
-    slate:  {head:"'DM Sans',sans-serif",       body:"'DM Sans',sans-serif"},
-    sage:   {head:"'Nunito',sans-serif",        body:"'Nunito',sans-serif"},
-    rose:   {head:"'Cormorant Garamond',serif", body:"'Cormorant Garamond',serif"},
-    noir:   {head:"'Playfair Display',serif",   body:"'DM Mono',monospace"},
+  const fm={
+    classic:{h:"'Josefin Sans',sans-serif",  b:"'Source Serif 4',Georgia,serif"},
+    warm:   {h:"'Playfair Display',serif",   b:"'Lora',serif"},
+    slate:  {h:"'DM Sans',sans-serif",       b:"'DM Sans',sans-serif"},
+    sage:   {h:"'Nunito',sans-serif",        b:"'Nunito',sans-serif"},
+    rose:   {h:"'Cormorant Garamond',serif", b:"'Cormorant Garamond',serif"},
+    noir:   {h:"'Playfair Display',serif",   b:"'DM Mono',monospace"},
   };
-  const fonts=fontMap[currentTheme]||fontMap.classic;
+  const fonts=fm[currentTheme]||fm.classic;
   return {
     bg:base.bg, headerText:base.text, accent,
-    addressText: dark?'#888':'#777',
+    addressText: dark?'#888':'#666',
     contactText: dark?'#666':'#888',
     divider:     dark?'#2a2a2a':'#e5e7eb',
     rowBg:       dark?'#1a1a1a':base.bg,
@@ -543,18 +673,18 @@ function getDocTheme(){
     nameText:    dark?'#f0f0f0':base.text,
     descText:    dark?'#666':'#999',
     priceText:   accent,
-    varTypeText: dark?'#aaa':'#666',
-    colHeaderBg: dark?'#0d0d0d':(base.bg==='#ffffff'?'#f3f4f6':base.bg),
-    colHeaderText:dark?'#555':'#aaa',
-    varHeaderBg: dark?'#1f1f1f':(base.bg==='#ffffff'?'#e9ecf0':base.bg),
+    varTypeText: dark?'#aaa':'#555',
+    colHdrBg:    dark?'#0d0d0d':(base.bg==='#ffffff'?'#f0f2f5':base.bg),
+    colHdrText:  dark?'#555':'#999',
+    flatRowBg:   dark?'#0f0f0f':(base.bg==='#ffffff'?'#f8f8f8':base.bg),
     footerText:  dark?'#333':'#ccc',
     fonts, dark,
   };
 }
 
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // RENDER PREVIEW
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 function renderPreview(){
   const t=getDocTheme();
   const sym=getCurrencySym();
@@ -562,38 +692,29 @@ function renderPreview(){
   const address =document.getElementById('f-address').value;
   const contact =document.getElementById('f-contact').value;
   const currency=document.getElementById('f-currency').value;
-  const hasDesc=items.some(it=>it.desc&&it.desc.trim());
+  const hasDesc =items.some(it=>it.desc&&it.desc.trim());
 
-  // Doc shell
   const doc=document.getElementById('doc');
-  doc.style.background=t.bg; doc.style.fontFamily=t.fonts.body;
-
-  // Accent bar
+  doc.style.background=t.bg; doc.style.fontFamily=t.fonts.b;
   document.getElementById('doc-accent-bar').style.background=t.accent;
-
-  // Header border
   document.getElementById('doc-header').style.borderBottom=`1px solid ${t.divider}`;
 
   // Logo
   const li=document.getElementById('doc-logo-img');
-  if(logoDataUrl){li.src=logoDataUrl;li.style.display='block';}else li.style.display='none';
+  logoDataUrl?(li.src=logoDataUrl,li.style.display='block'):li.style.display='none';
 
   // Biz name
   const bn=document.getElementById('doc-biz-name');
-  bn.textContent=business||'Business Name';
-  bn.style.color=t.headerText; bn.style.fontFamily=t.fonts.head;
+  bn.textContent=business||'Business Name'; bn.style.color=t.headerText; bn.style.fontFamily=t.fonts.h;
 
   // Address
-  const adEl=document.getElementById('doc-address');
-  adEl.textContent=address||'';
-  adEl.style.color=t.addressText;
-  adEl.style.display=address?'block':'none';
+  const ad=document.getElementById('doc-address');
+  if(address){ad.textContent=address;ad.style.color=t.addressText;ad.style.display='block';}
+  else ad.style.display='none';
 
-  // Price list label
+  // PL label & contact
   const pl=document.getElementById('doc-pl-label');
-  pl.style.color=t.accent; pl.style.fontFamily=t.fonts.head;
-
-  // Contact
+  pl.style.color=t.accent; pl.style.fontFamily=t.fonts.h;
   const ce=document.getElementById('doc-contact');
   ce.textContent=contact||''; ce.style.color=t.contactText;
 
@@ -608,147 +729,194 @@ function renderPreview(){
   // Body
   const body=document.getElementById('doc-body');
   if(!items.length){
-    body.innerHTML=`<div style="text-align:center;padding:60px 0;color:${t.colHeaderText};font-size:13px">Add items to see them here</div>`;
+    body.innerHTML=`<div style="text-align:center;padding:60px 0;color:${t.colHdrText};font-size:13px">Add items to see them here</div>`;
     return;
   }
-  if(currentLayout==='table')       body.innerHTML=renderTable(items,t,sym,hasDesc);
-  else if(currentLayout==='split')  body.innerHTML=renderSplit(items,t,sym,hasDesc);
-  else if(currentLayout==='twocol') body.innerHTML=renderTwoCol(items,t,sym,hasDesc);
-  else                              body.innerHTML=renderCards(items,t,sym,hasDesc);
+  if(currentLayout==='table')       body.innerHTML=renderTable(t,sym,hasDesc);
+  else if(currentLayout==='split')  body.innerHTML=renderSplit(t,sym,hasDesc);
+  else if(currentLayout==='twocol') body.innerHTML=renderTwoCol(t,sym,hasDesc);
+  else                              body.innerHTML=renderCards(t,sym,hasDesc);
 }
 
-// ════════════════════════════════════
-// ── TABLE LAYOUT ──
-// Works out all unique variant type labels across all items,
-// adds one column per type. Items that don't have that type show "—".
-// ════════════════════════════════════
-function getVariantTypes(){
-  // Collect all distinct type names in order of first appearance
-  const seen=[]; const order=[];
-  items.forEach(it=>it.variants.forEach(v=>{
-    const k=(v.type||'').trim();
-    if(k&&!seen.includes(k)){seen.push(k);order.push(k);}
-  }));
-  return order; // e.g. ['Small','Medium','Large']
-}
+// ─────────────────────────────────────────────
+// TABLE LAYOUT
+// ─────────────────────────────────────────────
+// Logic:
+// • Collect all GLOBAL type labels → become shared columns
+// • Collect all CUSTOM type labels per item → only used for that item's sub-rows
+// • Items with variantMode:'none' → flat row spanning all columns showing single price
+// • Items with variantMode:'global' → one row, global columns with their prices
+// • Items with variantMode:'custom' → NAME row + indented sub-rows per type
+// ─────────────────────────────────────────────
+function renderTable(t,sym,hasDesc){
+  const gLabels = globalTypes.map(g=>g.label||'').filter(Boolean);
+  const hasGlobal = gLabels.length>0 && items.some(i=>i.variantMode==='global');
+  const hasCustom = items.some(i=>i.variantMode==='custom');
 
-function renderTable(items,t,sym,hasDesc){
-  const types=getVariantTypes();
-  // If no named types, fall back to showing a single price column
-  const noTypes=types.length===0;
+  // Column template:  ITEM | [DESC] | global_col_1..n | PRICE (for flat/custom)
+  // If no global cols exist, omit them; custom types are shown as sub-rows
+  const descFr = hasDesc ? '1.4fr ' : '';
+  const gColsFr = hasGlobal ? gLabels.map(()=>'90px').join(' ') : '';
+  const flatColFr = (hasCustom||items.some(i=>i.variantMode==='none')) ? '100px' : '';
+  const itemFr = hasDesc ? '1.4fr' : '2fr';
 
-  // Build column template: Item | [Desc] | type1 | type2 | ...  OR  Item | [Desc] | Price
-  const typeCols=noTypes?1:types.length;
-  const itemColFr=hasDesc?'1.3fr 1.5fr':'2fr';
-  const typeFrs=Array(typeCols).fill('100px').join(' ');
-  const cols=`${itemColFr} ${typeFrs}`;
+  const parts = [itemFr, hasDesc?'1.6fr':'', hasGlobal?gColsFr:'', (hasCustom||items.some(i=>i.variantMode==='none'))?flatColFr:''].filter(Boolean);
+  const cols = parts.join(' ');
 
-  let html=`<div style="display:grid;grid-template-columns:${cols};padding:11px 14px;background:${t.colHeaderBg};border-bottom:1px solid ${t.divider}">`;
-  html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHeaderText}">ITEM</div>`;
-  if(hasDesc) html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHeaderText}">DESCRIPTION</div>`;
-  if(noTypes){
-    html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHeaderText};text-align:right">PRICE</div>`;
-  } else {
-    types.forEach(tp=>{
-      html+=`<div style="font-size:9px;letter-spacing:1.5px;font-weight:700;color:${t.accent};text-align:right;text-transform:uppercase">${esc(tp)}</div>`;
-    });
-  }
+  // Header row
+  let html=`<div style="display:grid;grid-template-columns:${cols};padding:11px 14px;background:${t.colHdrBg};border-bottom:2px solid ${t.divider}">`;
+  html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHdrText}">ITEM</div>`;
+  if(hasDesc) html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHdrText}">DESCRIPTION</div>`;
+  if(hasGlobal) gLabels.forEach(l=>{
+    html+=`<div style="font-size:9px;letter-spacing:1.5px;font-weight:700;color:${t.accent};text-align:right;text-transform:uppercase">${esc(l)}</div>`;
+  });
+  if(hasCustom||items.some(i=>i.variantMode==='none'))
+    html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.colHdrText};text-align:right">PRICE</div>`;
   html+='</div>';
 
+  // Item rows
   items.forEach((item,i)=>{
-    html+=`<div style="display:grid;grid-template-columns:${cols};padding:14px 14px;background:${i%2===0?t.rowBg:t.rowAlt};border-bottom:1px solid ${t.rowBorder};align-items:center">`;
-    html+=`<div style="font-size:13px;font-weight:600;color:${t.nameText};padding-right:10px">${esc(item.name)||`Item ${i+1}`}</div>`;
-    if(hasDesc) html+=`<div style="font-size:11px;color:${t.descText};padding-right:10px;line-height:1.5">${esc(item.desc)||''}</div>`;
-    if(noTypes){
-      const p=item.variants[0]?.price||'';
-      html+=`<div style="font-size:15px;font-weight:700;color:${t.priceText};text-align:right">${p?sym+fmtPrice(p):'—'}</div>`;
-    } else {
-      types.forEach(tp=>{
-        const v=item.variants.find(v=>(v.type||'').trim()===tp);
+    const rowBg = i%2===0?t.rowBg:t.rowAlt;
+
+    if(item.variantMode==='none'){
+      // ── FLAT ROW ──
+      html+=`<div style="display:grid;grid-template-columns:${cols};padding:14px 14px;background:${t.flatRowBg};border-bottom:1px solid ${t.rowBorder};align-items:center;border-left:3px solid ${t.accent}">`;
+      html+=`<div style="font-size:13px;font-weight:600;color:${t.nameText};padding-right:10px">${esc(item.name)||`Item ${i+1}`}</div>`;
+      if(hasDesc) html+=`<div style="font-size:11px;color:${t.descText};padding-right:10px;line-height:1.5">${esc(item.desc)||''}</div>`;
+      if(hasGlobal) gLabels.forEach(()=>html+=`<div style="font-size:12px;color:${t.colHdrText};text-align:right">—</div>`);
+      html+=`<div style="font-size:14px;font-weight:700;color:${t.priceText};text-align:right">${item.singlePrice?sym+fmtPrice(item.singlePrice):'—'}</div>`;
+      html+='</div>';
+
+    } else if(item.variantMode==='global'){
+      // ── GLOBAL ROW ──
+      html+=`<div style="display:grid;grid-template-columns:${cols};padding:14px 14px;background:${rowBg};border-bottom:1px solid ${t.rowBorder};align-items:center">`;
+      html+=`<div style="font-size:13px;font-weight:600;color:${t.nameText};padding-right:10px">${esc(item.name)||`Item ${i+1}`}</div>`;
+      if(hasDesc) html+=`<div style="font-size:11px;color:${t.descText};padding-right:10px;line-height:1.5">${esc(item.desc)||''}</div>`;
+      gLabels.forEach(l=>{
+        const v=item.variants.find(v=>v.type===l);
         const p=v?.price||'';
         html+=`<div style="font-size:14px;font-weight:700;color:${t.priceText};text-align:right">${p?sym+fmtPrice(p):'—'}</div>`;
+      });
+      if(hasCustom||items.some(ii=>ii.variantMode==='none'))
+        html+=`<div style="font-size:12px;color:${t.colHdrText};text-align:right">—</div>`;
+      html+='</div>';
+
+    } else {
+      // ── CUSTOM: name header row + sub-rows ──
+      // Name header
+      html+=`<div style="display:grid;grid-template-columns:${cols};padding:12px 14px 6px;background:${rowBg};border-bottom:none;align-items:center">`;
+      html+=`<div style="font-size:13px;font-weight:700;color:${t.nameText};padding-right:10px">${esc(item.name)||`Item ${i+1}`}</div>`;
+      if(hasDesc) html+=`<div style="font-size:11px;color:${t.descText};padding-right:10px;line-height:1.5">${esc(item.desc)||''}</div>`;
+      if(hasGlobal) gLabels.forEach(()=>html+=`<div></div>`);
+      if(hasCustom||items.some(ii=>ii.variantMode==='none')) html+=`<div></div>`;
+      html+='</div>';
+
+      // Sub-rows per variant
+      item.variants.forEach((v,vi)=>{
+        const isLast = vi===item.variants.length-1;
+        html+=`<div style="display:flex;align-items:center;padding:5px 14px 5px 28px;background:${rowBg};border-bottom:${isLast?`1px solid ${t.rowBorder}`:'none'}">`;
+        html+=`<span style="font-size:11px;font-weight:600;color:${t.varTypeText};min-width:100px">${esc(v.type||'—')}</span>`;
+        html+=`<span style="flex:1;border-bottom:1px dotted ${t.divider};margin:0 8px 4px"></span>`;
+        html+=`<span style="font-size:14px;font-weight:700;color:${t.priceText}">${v.price?sym+fmtPrice(v.price):'—'}</span>`;
+        html+='</div>';
+      });
+    }
+  });
+  return html;
+}
+
+// ─────────────────────────────────────────────
+// SPLIT / MENU LAYOUT
+// ─────────────────────────────────────────────
+function renderSplit(t,sym,hasDesc){
+  let html='<div style="padding:0 4px">';
+  items.forEach((item,i)=>{
+    html+=`<div style="margin-bottom:18px">`;
+    // Item name
+    html+=`<div style="font-size:14px;font-weight:700;color:${t.nameText};margin-bottom:5px">${esc(item.name)||`Item ${i+1}`}</div>`;
+    if(hasDesc&&item.desc) html+=`<div style="font-size:11px;color:${t.descText};margin-bottom:7px;padding-left:2px">${esc(item.desc)}</div>`;
+
+    if(item.variantMode==='none'){
+      html+=`<div style="display:flex;align-items:baseline;gap:6px">
+        <span style="font-size:12px;color:${t.varTypeText}">Flat Rate</span>
+        <span style="flex:1;border-bottom:1.5px dotted ${t.divider};margin-bottom:3px"></span>
+        <span style="font-size:15px;font-weight:700;color:${t.priceText}">${item.singlePrice?sym+fmtPrice(item.singlePrice):'—'}</span>
+      </div>`;
+    } else {
+      const variants = item.variantMode==='global'
+        ? globalTypes.map(g=>({type:g.label, price:item.variants.find(v=>v.type===g.label)?.price||''}))
+        : item.variants;
+      variants.forEach(v=>{
+        html+=`<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:5px;padding-left:10px">
+          <span style="font-size:12px;font-weight:600;color:${t.varTypeText};white-space:nowrap;min-width:80px">${esc(v.type||'—')}</span>
+          <span style="flex:1;border-bottom:1.5px dotted ${t.divider};margin-bottom:3px"></span>
+          <span style="font-size:14px;font-weight:700;color:${t.priceText};white-space:nowrap">${v.price?sym+fmtPrice(v.price):'—'}</span>
+        </div>`;
+      });
+    }
+    if(i<items.length-1) html+=`<div style="height:1px;background:${t.rowBorder};margin-top:12px"></div>`;
+    html+='</div>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ─────────────────────────────────────────────
+// TWO COLUMN LAYOUT
+// ─────────────────────────────────────────────
+function renderTwoCol(t,sym,hasDesc){
+  let html='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
+  items.forEach((item,i)=>{
+    html+=`<div style="background:${i%2===0?t.rowBg:t.rowAlt};border:1px solid ${t.rowBorder};border-left:3px solid ${t.priceText};border-radius:4px;padding:14px 14px 12px">
+      <div style="font-size:13px;font-weight:700;color:${t.nameText};margin-bottom:${hasDesc&&item.desc?'4px':'8px'}">${esc(item.name)||`Item ${i+1}`}</div>
+      ${hasDesc&&item.desc?`<div style="font-size:10px;color:${t.descText};line-height:1.4;margin-bottom:8px">${esc(item.desc)}</div>`:''}`;
+
+    if(item.variantMode==='none'){
+      html+=`<div style="display:flex;justify-content:space-between;padding:4px 0">
+        <span style="font-size:11px;color:${t.varTypeText}">Price</span>
+        <span style="font-size:14px;font-weight:700;color:${t.priceText}">${item.singlePrice?sym+fmtPrice(item.singlePrice):'—'}</span>
+      </div>`;
+    } else {
+      const variants = item.variantMode==='global'
+        ? globalTypes.map(g=>({type:g.label,price:item.variants.find(v=>v.type===g.label)?.price||''}))
+        : item.variants;
+      variants.forEach(v=>{
+        html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px dotted ${t.rowBorder}">
+          <span style="font-size:11px;color:${t.varTypeText}">${esc(v.type||'—')}</span>
+          <span style="font-size:13px;font-weight:700;color:${t.priceText}">${v.price?sym+fmtPrice(v.price):'—'}</span>
+        </div>`;
       });
     }
     html+='</div>';
   });
-  return html;
-}
-
-// ════════════════════════════════════
-// ── SPLIT / MENU LAYOUT ──
-// Shows each variant on its own dot-leader line indented under the item name
-// ════════════════════════════════════
-function renderSplit(items,t,sym,hasDesc){
-  let html='<div style="padding:0 6px">';
-  items.forEach((item,i)=>{
-    html+=`<div style="margin-bottom:${hasDesc&&item.desc?'20px':'14px'}">`;
-    // Item name header row
-    html+=`<div style="font-size:14px;font-weight:700;color:${t.nameText};margin-bottom:${item.variants.length>1?'8px':'4px'}">${esc(item.name)||`Item ${i+1}`}</div>`;
-    if(hasDesc&&item.desc) html+=`<div style="font-size:11px;color:${t.descText};margin-bottom:8px;padding-left:2px">${esc(item.desc)}</div>`;
-    // Variant lines
-    item.variants.forEach(v=>{
-      const label=(v.type||'').trim();
-      const price=v.price?sym+fmtPrice(v.price):'—';
-      html+=`<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:5px;padding-left:${item.variants.length>1?'12px':'0'}">
-        ${label?`<span style="font-size:12px;font-weight:600;color:${t.varTypeText};white-space:nowrap;min-width:70px">${esc(label)}</span>`:''}
-        <span style="flex:1;border-bottom:1.5px dotted ${t.divider};margin-bottom:3px"></span>
-        <span style="font-size:14px;font-weight:700;color:${t.priceText};white-space:nowrap">${price}</span>
-      </div>`;
-    });
-    if(i<items.length-1) html+=`<div style="height:1px;background:${t.rowBorder};margin-top:10px"></div>`;
-    html+='</div>';
-  });
   html+='</div>';
   return html;
 }
 
-// ════════════════════════════════════
-// ── TWO COLUMN LAYOUT ──
-// Each item card shows its variants as a mini list
-// ════════════════════════════════════
-function renderTwoCol(items,t,sym,hasDesc){
-  let html='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
-  items.forEach((item,i)=>{
-    html+=`<div style="background:${i%2===0?t.rowBg:t.rowAlt};border:1px solid ${t.rowBorder};border-left:3px solid ${t.priceText};border-radius:4px;padding:14px 14px 12px">
-      <div style="font-size:13px;font-weight:700;color:${t.nameText};margin-bottom:${hasDesc&&item.desc?'5px':'8px'}">${esc(item.name)||`Item ${i+1}`}</div>
-      ${hasDesc&&item.desc?`<div style="font-size:10px;color:${t.descText};line-height:1.4;margin-bottom:8px">${esc(item.desc)}</div>`:''}`;
-    // Variant rows inside card
-    item.variants.forEach(v=>{
-      const label=(v.type||'').trim();
-      const price=v.price?sym+fmtPrice(v.price):'—';
-      html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px dotted ${t.rowBorder}">
-        <span style="font-size:11px;color:${t.varTypeText}">${label||'—'}</span>
-        <span style="font-size:13px;font-weight:700;color:${t.priceText}">${price}</span>
-      </div>`;
-    });
-    html+='</div>';
-  });
-  html+='</div>';
-  return html;
-}
-
-// ════════════════════════════════════
-// ── CARD STACK LAYOUT ──
-// Full-width cards with inline variant chips
-// ════════════════════════════════════
-function renderCards(items,t,sym,hasDesc){
+// ─────────────────────────────────────────────
+// CARD STACK LAYOUT
+// ─────────────────────────────────────────────
+function renderCards(t,sym,hasDesc){
   let html='<div style="display:flex;flex-direction:column;gap:10px">';
   items.forEach(item=>{
-    html+=`<div style="background:${t.rowBg};border:1px solid ${t.rowBorder};border-radius:6px;padding:16px 18px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:${hasDesc&&item.desc?'6px':'10px'}">
+    const variants = item.variantMode==='none' ? null
+      : item.variantMode==='global'
+      ? globalTypes.map(g=>({type:g.label,price:item.variants.find(v=>v.type===g.label)?.price||''}))
+      : item.variants;
+
+    html+=`<div style="background:${t.rowBg};border:1px solid ${t.rowBorder};border-radius:6px;padding:15px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:${hasDesc&&item.desc?'6px':'8px'}">
         <div style="font-size:14px;font-weight:700;color:${t.nameText}">${esc(item.name)||'—'}</div>
-        ${item.variants.length===1?`<div style="font-size:17px;font-weight:800;color:${t.priceText}">${item.variants[0].price?sym+fmtPrice(item.variants[0].price):'—'}</div>`:''}
+        ${item.variantMode==='none'?`<div style="font-size:17px;font-weight:800;color:${t.priceText}">${item.singlePrice?sym+fmtPrice(item.singlePrice):'—'}</div>`:''}
       </div>
       ${hasDesc&&item.desc?`<div style="font-size:11px;color:${t.descText};line-height:1.5;margin-bottom:10px">${esc(item.desc)}</div>`:''}`;
-    // Multi-variant chips
-    if(item.variants.length>1){
-      html+='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">';
-      item.variants.forEach(v=>{
-        const label=(v.type||'').trim();
-        const price=v.price?sym+fmtPrice(v.price):'—';
-        html+=`<div style="background:${t.colHeaderBg};border:1px solid ${t.rowBorder};border-radius:5px;padding:5px 10px;display:flex;flex-direction:column;align-items:center;min-width:70px">
-          ${label?`<span style="font-size:9px;color:${t.varTypeText};font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px">${esc(label)}</span>`:''}
-          <span style="font-size:14px;font-weight:700;color:${t.priceText}">${price}</span>
+
+    if(variants&&variants.length){
+      html+='<div style="display:flex;flex-wrap:wrap;gap:8px">';
+      variants.forEach(v=>{
+        html+=`<div style="background:${t.colHdrBg};border:1px solid ${t.rowBorder};border-radius:5px;padding:5px 10px;text-align:center;min-width:72px">
+          ${v.type?`<div style="font-size:9px;color:${t.varTypeText};font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">${esc(v.type)}</div>`:''}
+          <div style="font-size:14px;font-weight:700;color:${t.priceText}">${v.price?sym+fmtPrice(v.price):'—'}</div>
         </div>`;
       });
       html+='</div>';
@@ -759,9 +927,9 @@ function renderCards(items,t,sym,hasDesc){
   return html;
 }
 
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // EXPORT
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 async function loadScript(src){
   return new Promise((res,rej)=>{
     if(document.querySelector(`script[src="${src}"]`))return res();
@@ -790,16 +958,19 @@ async function exportDoc(type){
       const a=document.createElement('a');a.download=biz+'.png';a.href=canvas.toDataURL('image/png');a.click();
     }
   }catch(err){alert('Export failed. Please try again.');console.error(err);}
-  finally{
-    pb.disabled=nb.disabled=false;
-    pb.textContent='⬇ Download PDF'; nb.textContent='🖼 PNG';
-  }
+  finally{pb.disabled=nb.disabled=false;pb.textContent='⬇ Download PDF';nb.textContent='🖼 PNG';}
 }
 
-// ════════════════════════════════════
+// ─────────────────────────────────────────────
 // INIT
-// ════════════════════════════════════
-function init(){buildLayoutGrid();buildThemeSwatches();renderItemsList();renderPreview();}
+// ─────────────────────────────────────────────
+function init(){
+  buildLayoutGrid();
+  buildThemeSwatches();
+  renderGlobalTypes();
+  renderItemsList();
+  renderPreview();
+}
 init();
 </script>
 </body>
