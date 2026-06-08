@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>PriceSheet – Godavari Tent Works</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Josefin+Sans:wght@400;600;700&family=Source+Serif+4:wght@400;600&family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;600&family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:wght@400;500;600&family=DM+Sans:wght@300;400;500;600;700&family=Nunito:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Raleway:wght@300;400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,sans-serif;background:#f0f2f5;height:100vh;overflow:hidden}
@@ -14,8 +14,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:#f0f2f5}
 ::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:4px}
-
-/* Shell */
 .app{display:flex;height:100vh;overflow:hidden}
 .sidebar{width:440px;min-width:320px;background:#fff;border-right:1px solid #e5e7eb;display:flex;flex-direction:column;overflow:hidden;box-shadow:2px 0 12px rgba(0,0,0,.04)}
 .sidebar-top{padding:18px 20px 0;border-bottom:1px solid #f0f0f0;flex-shrink:0}
@@ -35,8 +33,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .tarea:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.08)}
 .sel{width:100%;background:#fff;border:1.5px solid #e5e7eb;border-radius:8px;padding:9px 36px 9px 13px;color:#111;font-size:13px;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 .sel:focus{border-color:#6366f1}
-
-/* Logo */
 .logo-upload-label{display:flex;flex-direction:column;align-items:center;gap:6px;background:#f8f9fa;border:1.5px dashed #d1d5db;border-radius:8px;padding:20px;cursor:pointer;transition:border-color .15s}
 .logo-upload-label:hover{border-color:#6366f1}
 .logo-preview-box{background:#f8f9fa;border:1.5px solid #e5e7eb;border-radius:8px;padding:14px;text-align:center}
@@ -44,8 +40,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .logo-actions{display:flex;gap:8px;justify-content:center}
 .btn-change{padding:6px 14px;background:#fff;border:1.5px solid #e5e7eb;border-radius:6px;font-size:11px;color:#555;cursor:pointer;font-weight:600}
 .btn-remove-logo{padding:6px 14px;background:#fff;border:1.5px solid #fca5a5;border-radius:6px;font-size:11px;color:#ef4444;cursor:pointer;font-weight:600}
-
-/* Variant Types Panel */
 .vt-box{background:#f0f4ff;border:1.5px solid #c7d2fe;border-radius:10px;padding:14px;margin-bottom:18px}
 .vt-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .vt-title{font-size:11px;font-weight:700;color:#4338ca;letter-spacing:1px;text-transform:uppercase}
@@ -59,8 +53,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .btn-add-vt{width:100%;background:#e0e7ff;border:1.5px dashed #a5b4fc;border-radius:7px;padding:8px;color:#4338ca;font-size:11px;font-weight:700;cursor:pointer;margin-top:2px;transition:background .15s}
 .btn-add-vt:hover{background:#c7d2fe}
 .vt-empty{font-size:11px;color:#a5b4fc;text-align:center;padding:6px 0;font-style:italic}
-
-/* Items */
 .item-row{background:#fff;border:1.5px solid #e5e7eb;border-radius:10px;padding:13px 14px;margin-bottom:10px;position:relative}
 .item-row.drag-over{border-color:#6366f1;background:#f5f3ff}
 .item-row.dragging{opacity:.4}
@@ -72,8 +64,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .btn-remove-item:hover{color:#ef4444}
 .btn-add{width:100%;background:transparent;border:1.5px dashed #d1d5db;border-radius:8px;padding:11px;color:#9ca3af;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
 .btn-add:hover{border-color:#6366f1;color:#6366f1}
-
-/* Price grid inside item */
 .price-grid{display:grid;gap:6px;margin-top:8px}
 .price-cell{display:flex;flex-direction:column;gap:3px}
 .price-cell-lbl{font-size:9px;font-weight:700;color:#818cf8;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -81,8 +71,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .price-cell-sym{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px;pointer-events:none}
 .price-cell-inp{padding-left:18px!important;background:#f0f4ff!important;border-color:#e0e7ff!important}
 .price-cell-inp:focus{border-color:#6366f1!important}
-
-/* Toggle switch */
 .toggle-row{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid #e5e7eb;border-radius:8px;padding:10px 14px;margin-bottom:16px}
 .toggle-info-title{font-size:12px;font-weight:600;color:#374151}
 .toggle-info-sub{font-size:10px;color:#9ca3af;margin-top:1px}
@@ -90,8 +78,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .toggle-track.on{background:#6366f1}
 .toggle-knob{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s}
 .toggle-track.on .toggle-knob{left:21px}
-
-/* Layout picker */
 .layout-grid-ui{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .layout-card{background:#f8f9fa;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px 10px 10px;cursor:pointer;transition:all .15s;text-align:center}
 .layout-card:hover{border-color:#a5b4fc}
@@ -101,13 +87,11 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .lc-name{font-size:11px;font-weight:500;color:#555;margin-bottom:2px}
 .layout-card.active .lc-name{font-weight:700;color:#4338ca}
 .lc-desc{font-size:9px;color:#aaa;line-height:1.3}
-
-/* Theme swatches */
-.theme-swatches{display:flex;gap:12px;flex-wrap:wrap}
+.theme-swatches{display:flex;gap:10px;flex-wrap:wrap}
 .theme-swatch{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
-.swatch-circle{width:38px;height:38px;border-radius:50%;border:3px solid transparent;box-shadow:0 0 0 1px #e5e7eb;position:relative;overflow:hidden;transition:all .15s}
+.swatch-circle{width:36px;height:36px;border-radius:50%;border:3px solid transparent;box-shadow:0 0 0 1px #e5e7eb;position:relative;overflow:hidden;transition:all .15s}
 .swatch-circle.active{border-color:#6366f1;box-shadow:0 0 0 1px #6366f1}
-.swatch-pip{position:absolute;bottom:0;right:0;width:18px;height:18px;border-radius:50% 0 0 0}
+.swatch-pip{position:absolute;bottom:0;right:0;width:16px;height:16px;border-radius:50% 0 0 0}
 .swatch-label{font-size:9px;color:#aaa;font-weight:400;text-align:center;line-height:1.2}
 .swatch-circle.active+.swatch-label{color:#4338ca;font-weight:700}
 .theme-active-txt{margin-top:12px;font-size:11px;color:#aaa}
@@ -115,16 +99,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .accent-val{font-size:12px;font-weight:600}
 .accent-reset{font-size:10px;color:#6366f1;cursor:pointer;margin-top:2px}
 .accent-reset:hover{text-decoration:underline}
-
-/* Export bar */
 .export-bar{padding:14px 20px;border-top:1px solid #f0f0f0;display:flex;gap:8px;background:#fff;flex-shrink:0}
 .btn-png{flex:1;padding:11px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;color:#555;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
 .btn-png:hover{background:#f8f9fa}
 .btn-pdf{flex:2;padding:11px;border-radius:8px;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .15s}
 .btn-pdf:hover{opacity:.9}
 .btn-pdf:disabled,.btn-png:disabled{opacity:.5;cursor:not-allowed}
-
-/* Preview */
 .preview-area{flex:1;background:#e8eaed;display:flex;flex-direction:column;overflow:hidden}
 .preview-header{padding:12px 22px;border-bottom:1px solid #d8dadc;display:flex;align-items:center;justify-content:space-between;background:#edeef0;flex-shrink:0}
 .preview-label{font-size:10px;color:#999;letter-spacing:2px;font-weight:700}
@@ -132,39 +112,19 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;display:inline-block;animation:blink 2s infinite}
 .preview-scroll{flex:1;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:28px 20px}
 .preview-shadow{box-shadow:0 20px 60px rgba(0,0,0,.18),0 4px 16px rgba(0,0,0,.1);transform:scale(.76);transform-origin:top center;border-radius:2px;overflow:hidden}
-
-/* Document */
-#doc{width:794px;min-height:1123px;position:relative;overflow:hidden}
-.doc-accent-bar{height:5px;width:100%}
-.doc-header{padding:40px 52px 32px}
-.doc-header-inner{display:flex;justify-content:space-between;align-items:flex-start}
-.doc-left{flex:1}
-#doc-logo-img{max-height:52px;max-width:160px;margin-bottom:14px;display:block}
-.doc-biz-name{font-size:34px;font-weight:700;line-height:1.1;margin-bottom:4px;letter-spacing:-.5px}
-.doc-address{font-size:11px;line-height:1.7;margin-top:5px;white-space:pre-line}
-.doc-right{text-align:right;min-width:170px}
-.doc-pl-label{font-size:11px;letter-spacing:3px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
-.doc-contact{font-size:11px;line-height:1.9;white-space:pre-line}
-.doc-body{padding:24px 52px 90px}
-.doc-footer{position:absolute;bottom:0;left:0;right:0;padding:18px 52px 26px}
-.doc-footer-inner{display:flex;justify-content:space-between}
-.doc-footer-txt{font-size:9px;letter-spacing:1.5px}
+#doc{width:794px;background:#fff;position:relative}
+.doc-page{width:794px;height:1123px;position:relative;overflow:hidden;page-break-after:always}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 @media(max-width:800px){.app{flex-direction:column;height:auto;overflow:auto}.sidebar{width:100%;min-width:unset}.preview-area{min-height:640px}body{height:auto;overflow:auto}}
 </style>
 </head>
 <body>
 <div class="app">
-
-<!-- ══════════ SIDEBAR ══════════ -->
 <div class="sidebar">
   <div class="sidebar-top">
     <div class="brand-row">
       <div class="brand-icon">✦</div>
-      <div>
-        <div class="brand-name">PriceSheet</div>
-        <div class="brand-tag">INSTANT PRICE LISTS</div>
-      </div>
+      <div><div class="brand-name">PriceSheet</div><div class="brand-tag">INSTANT PRICE LISTS</div></div>
     </div>
     <div class="tabs">
       <button class="tab active"        onclick="switchTab('header',this)">Header</button>
@@ -172,24 +132,13 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <button class="tab"               onclick="switchTab('design',this)">Design</button>
     </div>
   </div>
-
   <div class="sidebar-body">
-
-    <!-- ── HEADER TAB ── -->
+    <!-- HEADER TAB -->
     <div id="tab-header">
-      <div class="section">
-        <label class="lbl">Business Name</label>
-        <input class="inp" id="f-business" value="Godavari Tent Works" oninput="rp()"/>
-      </div>
-      <div class="section">
-        <label class="lbl">Address</label>
-        <textarea class="tarea" id="f-address" oninput="rp()" placeholder="Street, City, State, PIN">Chirala, Prakasam District
-Andhra Pradesh – 523157</textarea>
-      </div>
-      <div class="section">
-        <label class="lbl">Phone / Email</label>
-        <input class="inp" id="f-contact" value="9295756242" oninput="rp()"/>
-      </div>
+      <div class="section"><label class="lbl">Business Name</label><input class="inp" id="f-business" value="Godavari Tent Works" oninput="rp()"/></div>
+      <div class="section"><label class="lbl">Address</label><textarea class="tarea" id="f-address" oninput="rp()" placeholder="Street, City, State, PIN">Chirala, Prakasam District
+Andhra Pradesh – 523157</textarea></div>
+      <div class="section"><label class="lbl">Phone / Email</label><input class="inp" id="f-contact" value="9295756242" oninput="rp()"/></div>
       <div class="section">
         <label class="lbl">Currency</label>
         <select class="sel" id="f-currency" onchange="rp()">
@@ -206,95 +155,70 @@ Andhra Pradesh – 523157</textarea>
       </div>
       <div class="section">
         <label class="lbl">Logo (Optional)</label>
-        <div id="logo-no">
-          <label class="logo-upload-label">
-            <span style="font-size:22px">🖼</span>
-            <span style="font-size:12px;font-weight:600;color:#555">Upload Logo</span>
-            <span style="font-size:10px;color:#bbb">PNG · SVG · JPG · WEBP</span>
-            <input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/>
-          </label>
-        </div>
-        <div id="logo-yes" style="display:none">
-          <div class="logo-preview-box">
-            <img id="logo-preview-img" src="" alt="logo"/>
-            <div class="logo-actions">
-              <label class="btn-change">Change<input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/></label>
-              <button class="btn-remove-logo" onclick="removeLogo()">Remove</button>
-            </div>
-          </div>
-        </div>
+        <div id="logo-no"><label class="logo-upload-label"><span style="font-size:22px">🖼</span><span style="font-size:12px;font-weight:600;color:#555">Upload Logo</span><span style="font-size:10px;color:#bbb">PNG · SVG · JPG · WEBP</span><input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/></label></div>
+        <div id="logo-yes" style="display:none"><div class="logo-preview-box"><img id="logo-preview-img" src="" alt="logo"/><div class="logo-actions"><label class="btn-change">Change<input type="file" accept="image/*" style="display:none" onchange="handleLogo(event)"/></label><button class="btn-remove-logo" onclick="removeLogo()">Remove</button></div></div></div>
       </div>
     </div>
-
-    <!-- ── ITEMS TAB ── -->
+    <!-- ITEMS TAB -->
     <div id="tab-items" style="display:none">
-
-      <!-- ── STEP 1: Variant types ── -->
       <div class="vt-box">
-        <div class="vt-title-row">
-          <span class="vt-title">⚡ Step 1 — Set Variant Types</span>
-          <span class="vt-count" id="vt-count">0 types</span>
-        </div>
-        <p style="font-size:11px;color:#6366f1;margin-bottom:10px;line-height:1.5">
-          Define the size/type columns once here (e.g. <b>Small, Medium, Large</b> or <b>20×30 ft, 30×50 ft</b>). Every item will share these same columns.
-        </p>
+        <div class="vt-title-row"><span class="vt-title">⚡ Step 1 — Variant Types</span><span class="vt-count" id="vt-count">0 types</span></div>
+        <p style="font-size:11px;color:#6366f1;margin-bottom:10px;line-height:1.5">Define size/type columns once — every item shares them (e.g. <b>Small, Medium, Large</b>).</p>
         <div id="vt-list"></div>
         <button class="btn-add-vt" onclick="addVT()">+ Add Variant Type</button>
       </div>
-
-      <!-- ── Description toggle ── -->
       <div class="toggle-row">
-        <div>
-          <div class="toggle-info-title">Show Description Field</div>
-          <div class="toggle-info-sub">Add a short note below each item name</div>
-        </div>
-        <div class="toggle-track" id="desc-track" onclick="toggleDesc()">
-          <div class="toggle-knob"></div>
-        </div>
+        <div><div class="toggle-info-title">Show Description Field</div><div class="toggle-info-sub">Add a short note below each item name</div></div>
+        <div class="toggle-track" id="desc-track" onclick="toggleDesc()"><div class="toggle-knob"></div></div>
       </div>
-
-      <!-- ── STEP 2: Items ── -->
-      <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">
-        Step 2 — Add Items &amp; Fill Prices
-      </div>
+      <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">Step 2 — Items &amp; Prices</div>
       <div id="items-list"></div>
-      <button class="btn-add" onclick="addItem()">
-        <span style="font-size:16px;line-height:1">+</span> Add Item
-      </button>
+      <button class="btn-add" onclick="addItem()"><span style="font-size:16px;line-height:1">+</span> Add Item</button>
     </div>
-
-    <!-- ── DESIGN TAB ── -->
+    <!-- DESIGN TAB -->
     <div id="tab-design" style="display:none">
-      <div class="section">
-        <label class="lbl">List Layout</label>
-        <div class="layout-grid-ui" id="layout-grid"></div>
-      </div>
-      <div class="section">
-        <label class="lbl">Color Theme</label>
-        <div class="theme-swatches" id="theme-swatches"></div>
-        <div class="theme-active-txt">Active: <span id="active-theme-name" style="font-weight:700"></span></div>
-      </div>
+      <div class="section"><label class="lbl">List Layout</label><div class="layout-grid-ui" id="layout-grid"></div></div>
+      <div class="section"><label class="lbl">Color Theme</label><div class="theme-swatches" id="theme-swatches"></div><div class="theme-active-txt">Active: <span id="active-theme-name" style="font-weight:700"></span></div></div>
       <div class="section">
         <label class="lbl">Custom Accent Color</label>
         <div class="accent-row">
           <input type="color" id="accent-picker" style="width:40px;height:40px;border-radius:8px;border:1.5px solid #e5e7eb;cursor:pointer;padding:2px" oninput="onAccentChange(this.value)"/>
+          <div><div class="accent-val" id="accent-val-txt"></div><div class="accent-reset" id="accent-reset-btn" style="display:none" onclick="resetAccent()">Reset to theme default</div></div>
+        </div>
+      </div>
+      <div class="section">
+        <label class="lbl">Section Heading</label>
+        <input class="inp" id="f-title" placeholder="e.g. Wedding Package Rates" oninput="sectionTitle=this.value;rp()"/>
+        <div style="font-size:10px;color:#aaa;margin-top:5px">Appears as a bold title above the item table</div>
+      </div>
+      <div class="section" style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:14px">
+        <div style="font-size:11px;font-weight:700;color:#92400e;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">🔖 Watermark</div>
+        <label class="lbl" style="margin-bottom:5px">Text</label>
+        <textarea class="tarea" id="wm-text" placeholder="Watermark text (blank = off)" rows="2" style="margin-bottom:10px;min-height:56px" oninput="wm.text=this.value;rp()">GODAVARI TENT WORKS
+CONTACT : 9295756242</textarea>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
           <div>
-            <div class="accent-val" id="accent-val-txt"></div>
-            <div class="accent-reset" id="accent-reset-btn" style="display:none" onclick="resetAccent()">Reset to theme default</div>
+            <label class="lbl">Opacity %</label>
+            <input class="inp" type="number" id="wm-opacity" value="12" min="2" max="60" oninput="wm.opacity=+this.value;rp()" style="padding:7px 10px"/>
+          </div>
+          <div>
+            <label class="lbl">Angle °</label>
+            <input class="inp" type="number" id="wm-angle" value="-35" min="-90" max="90" oninput="wm.angle=+this.value;rp()" style="padding:7px 10px"/>
+          </div>
+          <div>
+            <label class="lbl">Size px</label>
+            <input class="inp" type="number" id="wm-size" value="52" min="20" max="160" oninput="wm.size=+this.value;rp()" style="padding:7px 10px"/>
           </div>
         </div>
       </div>
     </div>
-
-  </div><!-- /sidebar-body -->
-
+  </div>
   <div class="export-bar">
     <button class="btn-png" id="btn-png" onclick="exportDoc('png')">🖼 PNG</button>
     <button class="btn-pdf" id="btn-pdf" onclick="exportDoc('pdf')">⬇ Download PDF</button>
   </div>
-</div><!-- /sidebar -->
+</div>
 
-<!-- ══════════ PREVIEW ══════════ -->
 <div class="preview-area">
   <div class="preview-header">
     <span class="preview-label">LIVE PREVIEW</span>
@@ -302,526 +226,462 @@ Andhra Pradesh – 523157</textarea>
   </div>
   <div class="preview-scroll">
     <div class="preview-shadow">
-      <div id="doc">
-        <div class="doc-accent-bar" id="doc-accent-bar"></div>
-        <div class="doc-header" id="doc-header">
-          <div class="doc-header-inner">
-            <div class="doc-left">
-              <img id="doc-logo-img" src="" alt="" style="display:none"/>
-              <div class="doc-biz-name" id="doc-biz-name"></div>
-              <div class="doc-address"  id="doc-address"  style="display:none"></div>
-            </div>
-            <div class="doc-right">
-              <div class="doc-pl-label" id="doc-pl-label">Price List</div>
-              <div class="doc-contact"  id="doc-contact"></div>
-            </div>
-          </div>
-        </div>
-        <div class="doc-body"   id="doc-body"></div>
-        <div class="doc-footer" id="doc-footer">
-          <div class="doc-footer-inner">
-            <div class="doc-footer-txt" id="doc-footer-l"></div>
-            <div class="doc-footer-txt" id="doc-footer-r"></div>
-          </div>
-        </div>
-      </div>
+      <div id="doc"></div>
     </div>
   </div>
 </div>
-
-</div><!-- /app -->
+</div>
 
 <script>
-// ═══════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════
-let logoDataUrl   = null;
-let currentLayout = 'table';
-let currentTheme  = 'classic';
-let customAccent  = '';
-let showDesc      = false;
-let idc = 100;   // item id counter
-let vtc = 900;   // variant type id counter
-let dragSrcIdx = null;
+// ═══════ STATE ═══════
+let logoDataUrl='data:image/png;base64,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bqzqfG7kia2/pmxJJt1fUsMLT67P5dvbcqKcVdJ2NOainsQwk4y5IZYJGt+VjnEl0Z8iDuR6EeRUOWnFRn6JHfLsOQJyOY8R4reOptPrsCHMvbmRqDY+B8FZGf405+5E+DBYGvjeYbCzcsdq9vqI2jbf3cVW0psWchPkshalu5Cwd5rMx3e7yA8mjwaOgXK+68MtiZkMEbpJHnZrWjckqHP1qcqA4IrsugyCm0+iSNOu+C3PqcyvZ0JhpM5qilRa3dhkD5T5MHUrUTQAAANgOgUG4S6NOm8Ybd5o/pGyBzj/AIbfBvv5qcroOGaY6RleKILOfmew2C5riqqtn5vhhm7GZDudyiIisirCIiIiIiIiIiIiIiIiIiIi/K3Xgt1ZatmJssMrSx7HDcOB7wqB4k8PrmnbMl7HRvs4l7twQN3Qb/hd6eR+60GuHNa5pa5oc0jYgjcELU1ajwanD4X5OGh6fhbijVqPSovFDzadR1+x7rIS+eRm+/I3f2V/at4VYXLPfZxkhxdl3UhjOaJx9W9Nvp9lX97hPq2vIWwxVLTfB0c236O2K5xOYbqEs6wZxDq3P21XT5LE9Nmm3L+E9HZe+nuoGinVThTq6ZwEkFWu097nzg7fQKbaU4R0KMrLOatfHSNO4ijBbGD6nvP6LxK4dqEw4Dllo6nL8r1N4mpss0nmBx6Nz/C8HgjpCaxkG6hvRFleD/Z2uH8x3n7BXYviGKOGJsULGsjYNmtaNgAvtdOpVNh06XEFmZ1J6lcqq9UiVOZMZ+Q0A6BdXLY6llaElHIV2T15Bs5jh+o8j6qps/wam7d0mDykXZE7iK0CC30DgDv9grjRJ+kyk+Bz23I30KU6sTlOJ5D7A7aj0VGUeDmekl2t5ChBHv1LC552+wVkaM0HhdNbTRMNq54zyjqPYeClaKPJYfkZN3HDZd3U5qRPYjqE8zlxH2b0GX5RERbpaNERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERf/2Q==',currentLayout='table',currentTheme='classic',customAccent='',showDesc=false;
+let idc=100,vtc=900,dragSrcIdx=null;
+let wm={text:'GODAVARI TENT WORKS\nCONTACT : 9295756242',opacity:12,angle:-35,size:52};
+let variantTypes=[{id:901,label:'20×30 ft'},{id:902,label:'30×50 ft'},{id:903,label:'40×60 ft'}];
+let sectionTitle='';
+let items=[{id:1,name:'Shamiyana / Tent',desc:'',prices:{901:'5000',902:'9000',903:'14000'},singlePrice:''}];
 
-// Variant types — defined ONCE, shared by all items
-// Each: { id, label }
-let variantTypes = [
-  {id:901, label:'20×30 ft'},
-  {id:902, label:'30×50 ft'},
-  {id:903, label:'40×60 ft'},
+const THEMES=[
+  {id:'classic',  name:'Classic',   bg:'#ffffff',text:'#111827',accent:'#111827'},
+  {id:'corporate',name:'Corporate', bg:'#f8fafc',text:'#0f172a',accent:'#2563eb'},
+  {id:'warm',     name:'Warm',      bg:'#fdf6ec',text:'#2d1f0e',accent:'#b45309'},
+  {id:'noir',     name:'Noir',      bg:'#0f0f0f',text:'#f0f0f0',accent:'#c9a84c'},
+  {id:'mint',     name:'Mint',      bg:'#f0faf4',text:'#14352a',accent:'#059669'},
+  {id:'rose',     name:'Rose',      bg:'#fff1f3',text:'#3b0a14',accent:'#be123c'},
+  {id:'slate',    name:'Slate',     bg:'#f1f5f9',text:'#0f172a',accent:'#6366f1'},
+  {id:'bold',     name:'Bold',      bg:'#ffffff',text:'#111111',accent:'#e85d04'},
 ];
 
-// Items — each item has:
-//   id, name, desc
-//   prices: { [variantTypeId]: priceString }   ← keyed by variant type id
-//   singlePrice: string  (used when variantTypes is empty)
-let items = [
-  {id:1, name:'Shamiyana / Tent',   desc:'', prices:{901:'5000', 902:'9000',  903:'14000'}, singlePrice:''},
-  {id:2, name:'Plastic Chairs',     desc:'', prices:{901:'15',   902:'20',    903:''},      singlePrice:''},
-  {id:3, name:'Round Tables',       desc:'', prices:{901:'250',  902:'300',   903:'350'},   singlePrice:''},
-  {id:4, name:'LED Stage Lights',   desc:'', prices:{901:'',     902:'',      903:''},      singlePrice:'8000'},
-  {id:5, name:'Generator (5 KVA)',  desc:'', prices:{901:'2500', 902:'3000',  903:'3500'},  singlePrice:''},
-];
-
-const THEMES = [
-  {id:'classic',name:'Classic White',bg:'#ffffff',text:'#1a1a1a',accent:'#1a1a2e'},
-  {id:'warm',   name:'Warm Paper',   bg:'#fdf6ec',text:'#2d1f0e',accent:'#b45309'},
-  {id:'slate',  name:'Slate Blue',   bg:'#f1f5f9',text:'#0f172a',accent:'#1d4ed8'},
-  {id:'sage',   name:'Sage Green',   bg:'#f0faf4',text:'#14352a',accent:'#15803d'},
-  {id:'rose',   name:'Rose',         bg:'#fff1f3',text:'#3b0a14',accent:'#be123c'},
-  {id:'noir',   name:'Noir Dark',    bg:'#111111',text:'#f0f0f0',accent:'#c9a84c'},
-];
-
-const LAYOUTS = [
-  {id:'table', name:'Table',      desc:'Classic rows + variant columns',
+// 8 layouts total
+const LAYOUTS=[
+  {id:'table',   name:'Table',     desc:'Rows + variant columns',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="6" rx="2" fill="currentColor" opacity=".5"/><rect x="2" y="11" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/><rect x="2" y="19" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/><rect x="2" y="27" width="40" height="5" rx="1" fill="currentColor" opacity=".25"/></svg>'},
-  {id:'split', name:'Menu Style', desc:'Item name ···· price on each line',
+  {id:'menu',    name:'Menu',      desc:'Dotted leader price lines',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="4" width="16" height="4" rx="2" fill="currentColor" opacity=".6"/><rect x="36" y="4" width="6" height="4" rx="2" fill="currentColor" opacity=".6"/><line x1="20" y1="6" x2="34" y2="6" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/><rect x="2" y="14" width="20" height="4" rx="2" fill="currentColor" opacity=".4"/><rect x="36" y="14" width="6" height="4" rx="2" fill="currentColor" opacity=".4"/><line x1="24" y1="16" x2="34" y2="16" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/><rect x="2" y="24" width="14" height="4" rx="2" fill="currentColor" opacity=".4"/><rect x="36" y="24" width="6" height="4" rx="2" fill="currentColor" opacity=".4"/><line x1="18" y1="26" x2="34" y2="26" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity=".3"/></svg>'},
-  {id:'twocol',name:'Two Column', desc:'Items in a 2-column grid',
+  {id:'twocol',  name:'Two Col',   desc:'2-column card grid',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="24" y="2" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="2" y="19" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/><rect x="24" y="19" width="18" height="13" rx="2" fill="currentColor" opacity=".35"/></svg>'},
-  {id:'card',  name:'Card Stack', desc:'Each item in its own card',
+  {id:'cards',   name:'Cards',     desc:'Full-width item cards',
    svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="9" rx="3" fill="currentColor" opacity=".35"/><rect x="2" y="14" width="40" height="9" rx="3" fill="currentColor" opacity=".35"/><rect x="2" y="26" width="40" height="6" rx="3" fill="currentColor" opacity=".35"/></svg>'},
+  {id:'compact', name:'Compact',   desc:'Dense rows, minimal padding',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="4" rx="1" fill="currentColor" opacity=".5"/><rect x="2" y="8" width="40" height="3" rx="1" fill="currentColor" opacity=".2"/><rect x="2" y="13" width="40" height="3" rx="1" fill="currentColor" opacity=".2"/><rect x="2" y="18" width="40" height="3" rx="1" fill="currentColor" opacity=".2"/><rect x="2" y="23" width="40" height="3" rx="1" fill="currentColor" opacity=".2"/><rect x="2" y="28" width="40" height="3" rx="1" fill="currentColor" opacity=".2"/></svg>'},
+  {id:'boxed',   name:'Boxed',     desc:'Each item fully bordered',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5"/><rect x="2" y="14" width="40" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="26" width="40" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".3"/></svg>'},
+  {id:'zebra',   name:'Zebra',     desc:'Strong alternating stripes',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><rect x="2" y="2" width="40" height="6" rx="1" fill="currentColor" opacity=".5"/><rect x="2" y="10" width="40" height="6" rx="1" fill="currentColor" opacity=".15"/><rect x="2" y="18" width="40" height="6" rx="1" fill="currentColor" opacity=".5"/><rect x="2" y="26" width="40" height="6" rx="1" fill="currentColor" opacity=".15"/></svg>'},
+  {id:'minimal', name:'Minimal',   desc:'Lines only, no backgrounds',
+   svg:'<svg width="44" height="34" viewBox="0 0 44 34"><line x1="2" y1="8" x2="42" y2="8" stroke="currentColor" stroke-width="1.5" opacity=".6"/><line x1="2" y1="16" x2="42" y2="16" stroke="currentColor" stroke-width=".8" opacity=".3"/><line x1="2" y1="22" x2="42" y2="22" stroke="currentColor" stroke-width=".8" opacity=".3"/><line x1="2" y1="28" x2="42" y2="28" stroke="currentColor" stroke-width=".8" opacity=".3"/></svg>'},
 ];
 
-// ═══════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════
-const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const getSym = () => { const s=document.getElementById('f-currency'); return s.options[s.selectedIndex]?.getAttribute('data-sym')||'₹'; };
-const fmtP = p => { if(!p&&p!==0)return ''; const n=parseFloat(p); if(isNaN(n))return String(p); return n%1===0?n.toLocaleString('en-IN'):n.toFixed(2); };
-const rp = () => renderPreview();  // short alias
+// ═══════ HELPERS ═══════
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const getSym=()=>{const s=document.getElementById('f-currency');return s.options[s.selectedIndex]?.getAttribute('data-sym')||'₹';};
+const fmtP=p=>{if(!p&&p!==0)return '';const n=parseFloat(p);if(isNaN(n))return String(p);return n%1===0?n.toLocaleString('en-IN'):n.toFixed(2);};
+const rp=()=>renderPreview();
 
-// ═══════════════════════════════════════
-// TABS
-// ═══════════════════════════════════════
+// ═══════ TABS ═══════
 function switchTab(name,btn){
   ['header','items','design'].forEach(t=>document.getElementById('tab-'+t).style.display=t===name?'block':'none');
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
 }
 
-// ═══════════════════════════════════════
-// LOGO
-// ═══════════════════════════════════════
+// ═══════ LOGO ═══════
 function handleLogo(e){
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    logoDataUrl=ev.target.result;
-    document.getElementById('logo-no').style.display='none';
-    document.getElementById('logo-yes').style.display='block';
-    document.getElementById('logo-preview-img').src=logoDataUrl;
-    rp();
-  };
-  r.readAsDataURL(f); e.target.value='';
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{logoDataUrl=ev.target.result;document.getElementById('logo-no').style.display='none';document.getElementById('logo-yes').style.display='block';document.getElementById('logo-preview-img').src=logoDataUrl;rp();};r.readAsDataURL(f);e.target.value='';
 }
-function removeLogo(){
-  logoDataUrl=null;
-  document.getElementById('logo-no').style.display='block';
-  document.getElementById('logo-yes').style.display='none';
-  rp();
-}
+function removeLogo(){logoDataUrl='';document.getElementById('logo-no').style.display='block';document.getElementById('logo-yes').style.display='none';rp();}
 
-// ═══════════════════════════════════════
-// DESC TOGGLE
-// ═══════════════════════════════════════
-function toggleDesc(){
-  showDesc=!showDesc;
-  const t=document.getElementById('desc-track');
-  showDesc?t.classList.add('on'):t.classList.remove('on');
-  renderItemsList(); rp();
-}
+// ═══════ DESC TOGGLE ═══════
+function toggleDesc(){showDesc=!showDesc;const tr=document.getElementById('desc-track');showDesc?tr.classList.add('on'):tr.classList.remove('on');renderItemsList();rp();}
 
-// ═══════════════════════════════════════
-// VARIANT TYPES
-// ═══════════════════════════════════════
-function addVT(){
-  variantTypes.push({id:vtc++, label:''});
-  renderVT(); renderItemsList(); rp();
-}
-function removeVT(id){
-  variantTypes=variantTypes.filter(v=>v.id!==id);
-  // Remove this key from all items' prices
-  items.forEach(it=>delete it.prices[id]);
-  renderVT(); renderItemsList(); rp();
-}
-function updateVT(id,val){
-  const v=variantTypes.find(v=>v.id===id); if(v) v.label=val;
-  renderItemsList(); rp();
-}
-
+// ═══════ VARIANT TYPES ═══════
+function addVT(){variantTypes.push({id:vtc++,label:''});renderVT();renderItemsList();rp();}
+function removeVT(id){variantTypes=variantTypes.filter(v=>v.id!==id);items.forEach(it=>delete it.prices[id]);renderVT();renderItemsList();rp();}
+function updateVT(id,val){const v=variantTypes.find(v=>v.id===id);if(v)v.label=val;renderItemsList();rp();}
 function renderVT(){
-  const c=document.getElementById('vt-list');
-  c.innerHTML='';
-  if(!variantTypes.length){
-    c.innerHTML='<div class="vt-empty">No variant types yet — add one below</div>';
-  } else {
-    variantTypes.forEach((vt,i)=>{
-      const d=document.createElement('div'); d.className='vt-row';
-      d.innerHTML=`<span class="vt-num">${i+1}</span>
-        <input class="vt-inp" placeholder="e.g. Small / 20×30 ft / Basic" value="${esc(vt.label)}"
-          oninput="updateVT(${vt.id},this.value)"/>
-        <button class="btn-rm-vt" onclick="removeVT(${vt.id})" title="Remove">×</button>`;
-      c.appendChild(d);
-    });
-  }
-  const cnt=variantTypes.length;
-  document.getElementById('vt-count').textContent=cnt===0?'No types':`${cnt} type${cnt!==1?'s':''}`;
+  const c=document.getElementById('vt-list');c.innerHTML='';
+  if(!variantTypes.length){c.innerHTML='<div class="vt-empty">No variant types yet</div>';}
+  else variantTypes.forEach((vt,i)=>{const d=document.createElement('div');d.className='vt-row';d.innerHTML=`<span class="vt-num">${i+1}</span><input class="vt-inp" placeholder="e.g. Small / 20×30 ft" value="${esc(vt.label)}" oninput="updateVT(${vt.id},this.value)"/><button class="btn-rm-vt" onclick="removeVT(${vt.id})">×</button>`;c.appendChild(d);});
+  const n=variantTypes.length;document.getElementById('vt-count').textContent=n?`${n} type${n>1?'s':''}`:' No types';
 }
 
-// ═══════════════════════════════════════
-// ITEMS
-// ═══════════════════════════════════════
-function addItem(){
-  items.push({id:idc++,name:'',desc:'',prices:{},singlePrice:''});
-  renderItemsList(); rp();
-}
-function removeItem(id){ items=items.filter(i=>i.id!==id); renderItemsList(); rp(); }
-function updateItemName(id,val){ const it=items.find(i=>i.id===id); if(it){it.name=val;rp();} }
-function updateItemDesc(id,val){ const it=items.find(i=>i.id===id); if(it){it.desc=val;rp();} }
-function updateItemPrice(itemId,vtId,val){
-  const it=items.find(i=>i.id===itemId); if(!it) return;
-  it.prices[vtId]=val; rp();
-}
-function updateSinglePrice(itemId,val){
-  const it=items.find(i=>i.id===itemId); if(!it) return;
-  it.singlePrice=val; rp();
-}
-
+// ═══════ ITEMS ═══════
+function addItem(){items.push({id:idc++,name:'',desc:'',prices:{},singlePrice:''});renderItemsList();rp();}
+function removeItem(id){items=items.filter(i=>i.id!==id);renderItemsList();rp();}
+function updateItemName(id,val){const it=items.find(i=>i.id===id);if(it){it.name=val;rp();}}
+function updateItemDesc(id,val){const it=items.find(i=>i.id===id);if(it){it.desc=val;rp();}}
+function updateItemPrice(iid,vid,val){const it=items.find(i=>i.id===iid);if(it){it.prices[vid]=val;rp();}}
+function updateSinglePrice(id,val){const it=items.find(i=>i.id===id);if(it){it.singlePrice=val;rp();}}
 function renderItemsList(){
-  const c=document.getElementById('items-list');
-  const sym=getSym();
-  const hasVT=variantTypes.length>0;
-  c.innerHTML='';
-
+  const c=document.getElementById('items-list'),sym=getSym(),hasVT=variantTypes.length>0;c.innerHTML='';
   items.forEach((item,idx)=>{
-    const div=document.createElement('div');
-    div.className='item-row'; div.draggable=true; div.dataset.idx=idx;
-
-    // Price inputs — either a grid of VT prices or a single price
-    let priceHTML='';
-    if(hasVT){
-      // Compute grid columns: up to 3 per row
-      const cols=Math.min(variantTypes.length,3);
-      priceHTML=`<div class="price-grid" style="grid-template-columns:repeat(${cols},1fr)">`;
-      variantTypes.forEach(vt=>{
-        const val=item.prices[vt.id]||'';
-        priceHTML+=`<div class="price-cell">
-          <span class="price-cell-lbl" title="${esc(vt.label)}">${esc(vt.label||'?')}</span>
-          <div class="price-cell-wrap">
-            <span class="price-cell-sym">${sym}</span>
-            <input class="item-inp price-cell-inp" type="number" placeholder="0"
-              value="${esc(val)}" oninput="updateItemPrice(${item.id},${vt.id},this.value)"/>
-          </div>
-        </div>`;
-      });
-      priceHTML+='</div>';
-    } else {
-      // No variant types — single price
-      priceHTML=`<div style="display:flex;align-items:center;gap:8px;margin-top:8px">
-        <span style="font-size:11px;color:#888;flex-shrink:0;font-weight:600">Price:</span>
-        <div style="position:relative;flex:1">
-          <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px">${sym}</span>
-          <input class="item-inp" style="padding-left:18px" type="number" placeholder="0"
-            value="${esc(item.singlePrice)}" oninput="updateSinglePrice(${item.id},this.value)"/>
-        </div>
-      </div>`;
-    }
-
-    div.innerHTML=`
-      <button class="btn-remove-item" onclick="removeItem(${item.id})">×</button>
-      <div class="item-name-row">
-        <span class="drag-handle">⠿</span>
-        <input class="item-inp" style="flex:1" placeholder="Item / Service name" value="${esc(item.name)}"
-          oninput="updateItemName(${item.id},this.value)"/>
-      </div>
-      ${showDesc?`<input class="item-inp" style="width:100%;margin-bottom:4px" placeholder="Description (optional)"
-        value="${esc(item.desc)}" oninput="updateItemDesc(${item.id},this.value)"/>`:''}
-      ${priceHTML}`;
-
-    // Drag events
+    const div=document.createElement('div');div.className='item-row';div.draggable=true;div.dataset.idx=idx;
+    let pH='';
+    if(hasVT){const cols=Math.min(variantTypes.length,3);pH=`<div class="price-grid" style="grid-template-columns:repeat(${cols},1fr)">${variantTypes.map(vt=>`<div class="price-cell"><span class="price-cell-lbl" title="${esc(vt.label)}">${esc(vt.label||'?')}</span><div class="price-cell-wrap"><span class="price-cell-sym">${sym}</span><input class="item-inp price-cell-inp" type="number" placeholder="0" value="${esc(item.prices[vt.id]||'')}" oninput="updateItemPrice(${item.id},${vt.id},this.value)"/></div></div>`).join('')}</div>`;}
+    else pH=`<div style="display:flex;align-items:center;gap:8px;margin-top:8px"><span style="font-size:11px;color:#888;flex-shrink:0;font-weight:600">Price:</span><div style="position:relative;flex:1"><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#bbb;font-size:11px">${sym}</span><input class="item-inp" style="padding-left:18px" type="number" placeholder="0" value="${esc(item.singlePrice)}" oninput="updateSinglePrice(${item.id},this.value)"/></div></div>`;
+    div.innerHTML=`<button class="btn-remove-item" onclick="removeItem(${item.id})">×</button><div class="item-name-row"><span class="drag-handle">⠿</span><input class="item-inp" style="flex:1" placeholder="Item / Service name" value="${esc(item.name)}" oninput="updateItemName(${item.id},this.value)"/></div>${showDesc?`<input class="item-inp" style="width:100%;margin-bottom:4px" placeholder="Description (optional)" value="${esc(item.desc)}" oninput="updateItemDesc(${item.id},this.value)"/>`:''}${pH}`;
     div.addEventListener('dragstart',e=>{dragSrcIdx=idx;div.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
-    div.addEventListener('dragend',  ()=>{dragSrcIdx=null;div.classList.remove('dragging');});
-    div.addEventListener('dragover', e=>{e.preventDefault();div.classList.add('drag-over');});
+    div.addEventListener('dragend',()=>{dragSrcIdx=null;div.classList.remove('dragging');});
+    div.addEventListener('dragover',e=>{e.preventDefault();div.classList.add('drag-over');});
     div.addEventListener('dragleave',()=>div.classList.remove('drag-over'));
-    div.addEventListener('drop',     e=>{
-      e.preventDefault();div.classList.remove('drag-over');
-      if(dragSrcIdx===null||dragSrcIdx===idx)return;
-      const moved=items.splice(dragSrcIdx,1)[0]; items.splice(idx,0,moved);
-      renderItemsList(); rp();
-    });
+    div.addEventListener('drop',e=>{e.preventDefault();div.classList.remove('drag-over');if(dragSrcIdx===null||dragSrcIdx===idx)return;const m=items.splice(dragSrcIdx,1)[0];items.splice(idx,0,m);renderItemsList();rp();});
     c.appendChild(div);
   });
   document.getElementById('itab-btn').textContent=`Items (${items.length})`;
 }
 
-// ═══════════════════════════════════════
-// DESIGN
-// ═══════════════════════════════════════
+// ═══════ DESIGN ═══════
 function buildLayoutGrid(){
   const g=document.getElementById('layout-grid');
-  LAYOUTS.forEach(l=>{
-    const d=document.createElement('div');
-    d.className='layout-card'+(l.id===currentLayout?' active':''); d.id='lc-'+l.id;
-    d.innerHTML=`${l.svg}<div class="lc-name">${l.name}</div><div class="lc-desc">${l.desc}</div>`;
-    d.onclick=()=>{currentLayout=l.id;document.querySelectorAll('.layout-card').forEach(c=>c.classList.remove('active'));d.classList.add('active');rp();};
-    g.appendChild(d);
-  });
+  LAYOUTS.forEach(l=>{const d=document.createElement('div');d.className='layout-card'+(l.id===currentLayout?' active':'');d.id='lc-'+l.id;d.innerHTML=`${l.svg}<div class="lc-name">${l.name}</div><div class="lc-desc">${l.desc}</div>`;d.onclick=()=>{currentLayout=l.id;document.querySelectorAll('.layout-card').forEach(c=>c.classList.remove('active'));d.classList.add('active');rp();};g.appendChild(d);});
 }
 function buildThemeSwatches(){
   const w=document.getElementById('theme-swatches');
-  THEMES.forEach(th=>{
-    const d=document.createElement('div'); d.className='theme-swatch'; d.id='ts-'+th.id;
-    d.innerHTML=`<div class="swatch-circle${th.id===currentTheme?' active':''}" style="background:${th.bg}" id="sc-${th.id}"><div class="swatch-pip" style="background:${th.accent}"></div></div><div class="swatch-label">${th.name.split(' ')[0]}</div>`;
-    d.onclick=()=>{currentTheme=th.id;customAccent='';updateThemeUI();rp();};
-    w.appendChild(d);
-  });
+  THEMES.forEach(th=>{const d=document.createElement('div');d.className='theme-swatch';d.id='ts-'+th.id;d.innerHTML=`<div class="swatch-circle${th.id===currentTheme?' active':''}" style="background:${th.bg}" id="sc-${th.id}"><div class="swatch-pip" style="background:${th.accent}"></div></div><div class="swatch-label">${th.name}</div>`;d.onclick=()=>{currentTheme=th.id;customAccent='';updateThemeUI();rp();};w.appendChild(d);});
   updateThemeUI();
 }
 function updateThemeUI(){
   const th=THEMES.find(t=>t.id===currentTheme);
   document.querySelectorAll('.swatch-circle').forEach(c=>c.classList.remove('active'));
   document.getElementById('sc-'+currentTheme)?.classList.add('active');
-  document.getElementById('active-theme-name').textContent=th.name;
-  document.getElementById('active-theme-name').style.color=th.accent;
-  const eff=customAccent||th.accent;
-  document.getElementById('accent-picker').value=eff;
-  document.getElementById('accent-val-txt').textContent=eff;
-  document.getElementById('accent-val-txt').style.color=eff;
-  document.getElementById('accent-reset-btn').style.display=customAccent?'block':'none';
+  document.getElementById('active-theme-name').textContent=th.name;document.getElementById('active-theme-name').style.color=th.accent;
+  const eff=customAccent||th.accent;document.getElementById('accent-picker').value=eff;document.getElementById('accent-val-txt').textContent=eff;document.getElementById('accent-val-txt').style.color=eff;document.getElementById('accent-reset-btn').style.display=customAccent?'block':'none';
 }
 function onAccentChange(v){customAccent=v;updateThemeUI();rp();}
 function resetAccent(){customAccent='';updateThemeUI();rp();}
 
-// ═══════════════════════════════════════
-// DOC THEME
-// ═══════════════════════════════════════
+// ═══════ THEME ═══════
 function getTheme(){
   const base=THEMES.find(t=>t.id===currentTheme)||THEMES[0];
   const accent=customAccent||base.accent;
   const dark=currentTheme==='noir';
   const fm={
-    classic:{h:"'Josefin Sans',sans-serif",  b:"'Source Serif 4',Georgia,serif"},
-    warm:   {h:"'Playfair Display',serif",   b:"'Lora',serif"},
-    slate:  {h:"'DM Sans',sans-serif",       b:"'DM Sans',sans-serif"},
-    sage:   {h:"'Nunito',sans-serif",        b:"'Nunito',sans-serif"},
-    rose:   {h:"'Cormorant Garamond',serif", b:"'Cormorant Garamond',serif"},
-    noir:   {h:"'Playfair Display',serif",   b:"'DM Mono',monospace"},
+    classic:   {h:"'Josefin Sans',sans-serif",   b:"'Source Serif 4',Georgia,serif"},
+    corporate: {h:"'Montserrat',sans-serif",      b:"'DM Sans',sans-serif"},
+    warm:      {h:"'Playfair Display',serif",     b:"'Lora',serif"},
+    noir:      {h:"'Playfair Display',serif",     b:"'DM Mono',monospace"},
+    mint:      {h:"'Nunito',sans-serif",          b:"'Nunito',sans-serif"},
+    rose:      {h:"'Cormorant Garamond',serif",   b:"'Cormorant Garamond',serif"},
+    slate:     {h:"'Raleway',sans-serif",         b:"'DM Sans',sans-serif"},
+    bold:      {h:"'Montserrat',sans-serif",      b:"'Inter',sans-serif"},
   };
   const f=fm[currentTheme]||fm.classic;
+  const rowBgBase=dark?'#1a1a1a':base.bg;
+  const rowAltBase=dark?'#141414':(base.bg==='#ffffff'||base.bg==='#f8fafc'?'#f5f5f5':base.bg);
   return {
-    bg:base.bg, hText:base.text, accent,
-    addrText:  dark?'#888':'#666',
-    contText:  dark?'#666':'#888',
-    div:       dark?'#2a2a2a':'#e5e7eb',
-    rowBg:     dark?'#1a1a1a':base.bg,
-    rowAlt:    dark?'#141414':(base.bg==='#ffffff'?'#f9fafb':base.bg),
-    rowBord:   dark?'#252525':'#e8e8e8',
-    nameText:  dark?'#f0f0f0':base.text,
-    descText:  dark?'#666':'#999',
-    priceText: accent,
-    vtText:    dark?'#aaa':'#555',
-    chBg:      dark?'#0d0d0d':(base.bg==='#ffffff'?'#f0f2f5':base.bg),
-    chText:    dark?'#555':'#999',
-    flatBg:    dark?'#0f0f0f':(base.bg==='#ffffff'?'#f8f8f8':base.bg),
-    footText:  dark?'#333':'#ccc',
-    f, dark,
+    bg:base.bg,hText:base.text,accent,
+    addrText:dark?'#777':'#666',contText:dark?'#666':'#888',
+    div:dark?'#272727':'#e0e0e0',
+    rowBg:rowBgBase,rowAlt:rowAltBase,
+    rowBord:dark?'#252525':'#ebebeb',
+    nameText:dark?'#f0f0f0':base.text,descText:dark?'#666':'#999',
+    priceText:accent,vtText:dark?'#999':'#555',
+    chBg:dark?'#111':(base.bg==='#ffffff'||base.bg==='#f8fafc'?'#f3f4f6':base.bg),
+    chText:dark?'#555':'#999',
+    stripeBg:dark?'#1f1f1f':(base.bg==='#ffffff'?'#f0f0f0':'#e8e8e8'),
+    f,dark,
   };
 }
 
 // ═══════════════════════════════════════
-// RENDER PREVIEW
+// HEADER BUILDERS
 // ═══════════════════════════════════════
-function renderPreview(){
-  const t=getTheme();
-  const sym=getSym();
+function buildFullHeader(t){
   const business=document.getElementById('f-business').value;
   const address =document.getElementById('f-address').value;
   const contact =document.getElementById('f-contact').value;
-  const currency=document.getElementById('f-currency').value;
-  const hasDesc =showDesc && items.some(it=>it.desc&&it.desc.trim());
-  const hasVT   =variantTypes.length>0;
+  let h=`<div style="height:5px;background:${t.accent};width:100%"></div>`;
+  h+=`<div style="padding:32px 48px 28px;border-bottom:1px solid ${t.div};background:${t.bg}">`;
+  h+=`<div style="display:flex;justify-content:space-between;align-items:center">`;
+  // Left: logo + name on same line
+  h+=`<div style="display:flex;align-items:center;gap:14px;flex:1;padding-right:20px">`;
+  if(logoDataUrl) h+=`<img src="${logoDataUrl}" alt="logo" style="height:64px;max-width:80px;object-fit:contain;flex-shrink:0"/>`;
+  if(logoDataUrl) h+=`<div style="width:1.5px;height:56px;background:${t.div};flex-shrink:0"></div>`;
+  h+=`<div>`;
+  h+=`<div style="font-family:${t.f.h};font-size:30px;font-weight:700;color:${t.hText};line-height:1.1;letter-spacing:-.5px">${esc(business)||'Business Name'}</div>`;
+  if(address) h+=`<div style="font-size:11px;color:${t.addrText};margin-top:4px;line-height:1.6;white-space:pre-line">${esc(address)}</div>`;
+  h+=`</div></div>`;
+  // Right: label + contact
+  h+=`<div style="text-align:right;flex-shrink:0;min-width:140px">`;
+  h+=`<div style="font-family:${t.f.h};font-size:9px;letter-spacing:3px;font-weight:700;color:${t.accent};text-transform:uppercase;margin-bottom:8px">Price List</div>`;
+  if(contact) h+=`<div style="font-size:11px;color:${t.contText};line-height:1.9;white-space:pre-line">${esc(contact)}</div>`;
+  h+=`</div></div></div>`;
+  return h;
+}
 
-  const doc=document.getElementById('doc');
-  doc.style.background=t.bg; doc.style.fontFamily=t.f.b;
-  document.getElementById('doc-accent-bar').style.background=t.accent;
-  document.getElementById('doc-header').style.borderBottom=`1px solid ${t.div}`;
-
-  const li=document.getElementById('doc-logo-img');
-  logoDataUrl?(li.src=logoDataUrl,li.style.display='block'):li.style.display='none';
-
-  const bn=document.getElementById('doc-biz-name');
-  bn.textContent=business||'Business Name'; bn.style.color=t.hText; bn.style.fontFamily=t.f.h;
-
-  const ad=document.getElementById('doc-address');
-  address?(ad.textContent=address,ad.style.color=t.addrText,ad.style.display='block'):ad.style.display='none';
-
-  const pl=document.getElementById('doc-pl-label');
-  pl.style.color=t.accent; pl.style.fontFamily=t.f.h;
-  const ce=document.getElementById('doc-contact');
-  ce.textContent=contact||''; ce.style.color=t.contText;
-
-  const cnt=items.length;
-  document.getElementById('doc-footer').style.borderTop=`1px solid ${t.div}`;
-  document.getElementById('doc-footer-l').textContent=`${cnt} ITEM${cnt!==1?'S':''} · ${currency} · ${new Date().getFullYear()}`;
-  document.getElementById('doc-footer-l').style.color=t.footText;
-  document.getElementById('doc-footer-r').textContent=business||'';
-  document.getElementById('doc-footer-r').style.color=t.footText;
-
-  const body=document.getElementById('doc-body');
-  if(!items.length){
-    body.innerHTML=`<div style="text-align:center;padding:60px 0;color:${t.chText};font-size:13px">Add items to see them here</div>`;
-    return;
-  }
-  if(currentLayout==='table')       body.innerHTML=renderTable(t,sym,hasDesc,hasVT);
-  else if(currentLayout==='split')  body.innerHTML=renderSplit(t,sym,hasDesc,hasVT);
-  else if(currentLayout==='twocol') body.innerHTML=renderTwoCol(t,sym,hasDesc,hasVT);
-  else                              body.innerHTML=renderCards(t,sym,hasDesc,hasVT);
+function buildCompactHeader(t){
+  const business=document.getElementById('f-business').value;
+  // Compact continuation header — accent bar + single line business name
+  let h=`<div style="height:3px;background:${t.accent};width:100%"></div>`;
+  h+=`<div style="padding:10px 48px;border-bottom:1px solid ${t.div};background:${t.bg};display:flex;align-items:center;justify-content:space-between">`;
+  h+=`<div style="font-family:${t.f.h};font-size:13px;font-weight:700;color:${t.hText}">${esc(business)||'Business Name'}</div>`;
+  h+=`<div style="font-size:9px;letter-spacing:2px;color:${t.accent};font-weight:700;text-transform:uppercase">Price List (cont.)</div>`;
+  h+=`</div>`;
+  return h;
 }
 
 // ═══════════════════════════════════════
-// TABLE LAYOUT
-// — Column header row: ITEM | [DESC] | VT1 | VT2 | VT3 …
-// — Each item is one row with prices under the right columns
-// — If no VTs: ITEM | [DESC] | PRICE
+// TABLE COLUMN CALC — tight fit
+// Key fix: item name column auto-sizes, price cols are fixed small widths
+// No wasted space between name and prices
 // ═══════════════════════════════════════
-function renderTable(t,sym,hasDesc,hasVT){
-  const vtCols = hasVT ? variantTypes : [];
-  const itemFr = hasDesc ? '1.4fr' : '2fr';
-  const descFr = hasDesc ? ' 1.6fr' : '';
-  const priceFrs = hasVT
-    ? variantTypes.map(()=>'90px').join(' ')
-    : '130px';
-  const cols = `${itemFr}${descFr} ${priceFrs}`;
+function tableColsFr(hasDesc,hasVT){
+  // Price column width: tighter = 80px per variant
+  const priceW = hasVT ? variantTypes.map(()=>'80px').join(' ') : '110px';
+  // Name column fills remaining space; desc col if present
+  if(hasDesc) return `1fr 1.2fr ${priceW}`;
+  return `1fr ${priceW}`;
+}
 
-  // ── Column header ──
-  let html=`<div style="display:grid;grid-template-columns:${cols};padding:11px 14px;background:${t.chBg};border-bottom:2px solid ${t.div}">`;
-  html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.chText}">ITEM</div>`;
-  if(hasDesc) html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.chText}">DESCRIPTION</div>`;
-  if(hasVT){
-    variantTypes.forEach(vt=>{
-      html+=`<div style="font-size:9px;letter-spacing:1.5px;font-weight:700;color:${t.accent};text-align:right;text-transform:uppercase">${esc(vt.label||'?')}</div>`;
-    });
-  } else {
-    html+=`<div style="font-size:9px;letter-spacing:2px;font-weight:700;color:${t.chText};text-align:right">PRICE</div>`;
-  }
-  html+='</div>';
+// ═══════════════════════════════════════
+// LAYOUT RENDERERS — return array of row HTML strings
+// Caller decides which rows go on which page
+// ═══════════════════════════════════════
 
-  // ── Item rows ──
+function buildTableHeaderRow(t,hasDesc,hasVT){
+  const cols=tableColsFr(hasDesc,hasVT);
+  let h=`<div style="display:grid;grid-template-columns:${cols};padding:8px 14px;background:${t.chBg};border-top:1px solid ${t.div};border-bottom:2px solid ${t.div}">`;
+  h+=`<div style="font-size:11px;letter-spacing:2px;font-weight:700;color:${t.chText}">ITEM</div>`;
+  if(hasDesc) h+=`<div style="font-size:11px;letter-spacing:2px;font-weight:700;color:${t.chText}">DESCRIPTION</div>`;
+  if(hasVT) variantTypes.forEach(vt=>{h+=`<div style="font-size:11px;letter-spacing:1.5px;font-weight:700;color:${t.accent};text-align:right;text-transform:uppercase;padding-right:4px">${esc(vt.label||'?')}</div>`;});
+  else h+=`<div style="font-size:11px;letter-spacing:2px;font-weight:700;color:${t.chText};text-align:right">PRICE</div>`;
+  h+=`</div>`;
+  return h;
+}
+
+function buildTableRow(item,i,t,sym,hasDesc,hasVT,layout){
+  const cols=tableColsFr(hasDesc,hasVT);
+  const compact=layout==='compact';
+  const pad=compact?'5px 14px':'9px 14px';
+  // zebra: strong stripe
+  let bg;
+  if(layout==='zebra') bg=i%2===0?t.stripeBg:t.rowBg;
+  else bg=i%2===0?t.rowBg:t.rowAlt;
+  // minimal: no bg
+  if(layout==='minimal') bg='transparent';
+  // boxed: no alt bg
+  if(layout==='boxed') bg=t.rowBg;
+  const borderBottom=layout==='minimal'?`border-bottom:1px solid ${t.div}`:`border-bottom:1px solid ${t.rowBord}`;
+  const borderLeft=layout==='boxed'?`border-left:3px solid ${t.accent};border-right:1px solid ${t.rowBord};border-top:1px solid ${t.rowBord};margin-bottom:3px;border-radius:3px;`:'';
+  let h=`<div style="display:grid;grid-template-columns:${cols};padding:${pad};background:${bg};${borderBottom};${borderLeft}align-items:center">`;
+  h+=`<div style="font-size:16px;font-weight:600;color:${t.nameText}">${esc(item.name)||`Item ${i+1}`}</div>`;
+  if(hasDesc) h+=`<div style="font-size:10.5px;color:${t.descText};line-height:1.4;padding-right:8px">${esc(item.desc)||''}</div>`;
+  if(hasVT) variantTypes.forEach(vt=>{const p=item.prices[vt.id]||'';h+=`<div style="font-size:18px;font-weight:700;color:${t.priceText};text-align:right;padding-right:4px">${p?sym+fmtP(p):'—'}</div>`;});
+  else h+=`<div style="font-size:18px;font-weight:700;color:${t.priceText};text-align:right">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</div>`;
+  h+=`</div>`;
+  return h;
+}
+
+// Table-based layouts: table, compact, zebra, minimal, boxed
+function isTableBased(layout){return ['table','compact','zebra','minimal','boxed'].includes(layout);}
+
+// ═══════════════════════════════════════
+// BLOCK RENDERERS (non-table)
+// ═══════════════════════════════════════
+function renderMenuBlock(items,t,sym,hasDesc){
+  let h='<div style="padding:0">';
   items.forEach((item,i)=>{
-    const bg=i%2===0?t.rowBg:t.rowAlt;
-    html+=`<div style="display:grid;grid-template-columns:${cols};padding:14px 14px;background:${bg};border-bottom:1px solid ${t.rowBord};align-items:center">`;
-    html+=`<div style="font-size:13px;font-weight:600;color:${t.nameText};padding-right:10px">${esc(item.name)||`Item ${i+1}`}</div>`;
-    if(hasDesc) html+=`<div style="font-size:11px;color:${t.descText};padding-right:10px;line-height:1.5">${esc(item.desc)||''}</div>`;
-    if(hasVT){
-      variantTypes.forEach(vt=>{
-        const p=item.prices[vt.id]||'';
-        html+=`<div style="font-size:14px;font-weight:700;color:${t.priceText};text-align:right">${p?sym+fmtP(p):'—'}</div>`;
-      });
+    h+=`<div style="margin-bottom:14px">`;
+    h+=`<div style="font-size:16px;font-weight:700;color:${t.nameText};margin-bottom:${variantTypes.length?'5px':'3px'}">${esc(item.name)||`Item ${i+1}`}</div>`;
+    if(hasDesc&&item.desc) h+=`<div style="font-size:10px;color:${t.descText};margin-bottom:5px">${esc(item.desc)}</div>`;
+    if(variantTypes.length){
+      variantTypes.forEach(vt=>{const p=item.prices[vt.id]||'';h+=`<div style="display:flex;align-items:baseline;gap:4px;margin-bottom:3px;padding-left:8px"><span style="font-size:11px;font-weight:600;color:${t.vtText};white-space:nowrap;min-width:72px">${esc(vt.label||'?')}</span><span style="flex:1;border-bottom:1.5px dotted ${t.div};margin-bottom:2px"></span><span style="font-size:18px;font-weight:700;color:${t.priceText};white-space:nowrap;padding-left:6px">${p?sym+fmtP(p):'—'}</span></div>`;});
     } else {
-      html+=`<div style="font-size:15px;font-weight:700;color:${t.priceText};text-align:right">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</div>`;
+      h+=`<div style="display:flex;align-items:baseline;gap:4px"><span style="flex:1;border-bottom:1.5px dotted ${t.div};margin-bottom:2px"></span><span style="font-size:18px;font-weight:700;color:${t.priceText}">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</span></div>`;
     }
-    html+='</div>';
+    if(i<items.length-1) h+=`<div style="height:1px;background:${t.rowBord};margin-top:10px"></div>`;
+    h+='</div>';
+  });
+  return h+'</div>';
+}
+
+function renderTwoColBlock(items,t,sym,hasDesc){
+  // Ensure even number of items for clean grid; pad if odd
+  let h='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
+  items.forEach((item,i)=>{
+    h+=`<div style="background:${i%2===0?t.rowBg:t.rowAlt};border:1px solid ${t.rowBord};border-left:3px solid ${t.priceText};border-radius:3px;padding:12px 12px 10px">`;
+    h+=`<div style="font-size:16px;font-weight:700;color:${t.nameText};margin-bottom:${hasDesc&&item.desc?'3px':'7px'}">${esc(item.name)||`Item ${i+1}`}</div>`;
+    if(hasDesc&&item.desc) h+=`<div style="font-size:10px;color:${t.descText};line-height:1.4;margin-bottom:7px">${esc(item.desc)}</div>`;
+    if(variantTypes.length) variantTypes.forEach(vt=>{const p=item.prices[vt.id]||'';h+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px dotted ${t.rowBord}"><span style="font-size:10px;color:${t.vtText}">${esc(vt.label||'?')}</span><span style="font-size:18px;font-weight:700;color:${t.priceText}">${p?sym+fmtP(p):'—'}</span></div>`;});
+    else h+=`<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="font-size:10px;color:${t.vtText}">Price</span><span style="font-size:18px;font-weight:700;color:${t.priceText}">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</span></div>`;
+    h+='</div>';
+  });
+  h+='</div>';
+  return h;
+}
+
+function renderCardsBlock(items,t,sym,hasDesc){
+  let h='<div style="display:flex;flex-direction:column;gap:8px">';
+  items.forEach(item=>{
+    h+=`<div style="background:${t.rowBg};border:1px solid ${t.rowBord};border-radius:5px;padding:13px 16px">`;
+    h+=`<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:${hasDesc&&item.desc?'5px':'7px'}">`;
+    h+=`<div style="font-size:16px;font-weight:700;color:${t.nameText}">${esc(item.name)||'—'}</div>`;
+    if(!variantTypes.length) h+=`<div style="font-size:18px;font-weight:800;color:${t.priceText}">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</div>`;
+    h+=`</div>`;
+    if(hasDesc&&item.desc) h+=`<div style="font-size:10px;color:${t.descText};line-height:1.5;margin-bottom:8px">${esc(item.desc)}</div>`;
+    if(variantTypes.length){h+='<div style="display:flex;flex-wrap:wrap;gap:6px">';variantTypes.forEach(vt=>{const p=item.prices[vt.id]||'';h+=`<div style="background:${t.chBg};border:1px solid ${t.rowBord};border-radius:4px;padding:4px 10px;text-align:center;min-width:66px"><div style="font-size:8.5px;color:${t.vtText};font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:1px">${esc(vt.label||'?')}</div><div style="font-size:18px;font-weight:700;color:${t.priceText}">${p?sym+fmtP(p):'—'}</div></div>`;});h+='</div>';}
+    h+='</div>';
+  });
+  return h+'</div>';
+}
+
+// ═══════════════════════════════════════
+// MULTI-PAGE ENGINE
+// A4 inner content height = 1123px - header - padding
+// We measure each row/block height and break into pages
+// ═══════════════════════════════════════
+const A4H      = 1123;  // px total page height
+const FULL_HDR = 145;   // px for full header (accent + padding + name/contact)
+const COMP_HDR = 44;    // px for compact continuation header
+const BODY_PAD = 48;    // top+bottom body padding per page (24px each)
+const ITEM_EST = {      // estimated px per item per layout
+  table:   44,
+  compact: 32,
+  zebra:   44,
+  minimal: 38,
+  boxed:   50,
+  menu:    86,
+  twocol:  105,
+  cards:   90,
+};
+const TBL_HDR_H = 34;   // px for column header row in table layouts
+
+function renderPreview(){
+  const t=getTheme();
+  const sym=getSym();
+  const hasDesc=showDesc&&items.some(it=>it.desc&&it.desc.trim());
+  const hasVT=variantTypes.length>0;
+  const doc=document.getElementById('doc');
+  doc.style.background=t.bg;doc.style.fontFamily=t.f.b;
+
+  if(!items.length){
+    doc.innerHTML=`<div class="doc-page" style="background:${t.bg}">${buildFullHeader(t)}<div style="padding:48px;text-align:center;color:${t.chText};font-size:13px">Add items to see them here</div></div>`;
+    return;
+  }
+  doc.innerHTML=buildPages(t,sym,hasDesc,hasVT);
+}
+
+// ═══════════════════════════════════════
+// WATERMARK OVERLAY — absolute, diagonal, centered on page
+// ═══════════════════════════════════════
+function buildWatermark(pageBg){
+  if(!wm.text||!wm.text.trim()) return '';
+  const dark = pageBg==='#0f0f0f';
+  const col = dark ? '255,255,255' : '0,0,0';
+  const lines = wm.text.split('\n').filter(l=>l.trim());
+  const linesHTML = lines.map(l=>
+    `<div style="white-space:nowrap;font-size:${wm.size}px;font-weight:900;letter-spacing:6px;color:rgba(${col},${wm.opacity/100});font-family:'Montserrat',sans-serif;text-transform:uppercase;user-select:none;line-height:1.2">${l}</div>`
+  ).join('');
+  return `<div style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;display:flex;align-items:center;justify-content:center;z-index:99">
+    <div style="transform:rotate(${wm.angle}deg);text-align:center">${linesHTML}</div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════
+// SECTION HEADING block above table
+// ═══════════════════════════════════════
+function buildSectionHeading(t){
+  if(!sectionTitle||!sectionTitle.trim()) return '';
+  return `<div style="padding:18px 0 10px;border-bottom:3px solid ${t.accent};margin-bottom:2px">
+    <div style="font-family:${t.f.h};font-size:22px;font-weight:700;color:${t.hText};letter-spacing:-.3px">${esc(sectionTitle)}</div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════
+// SMART PAGE BREAK ENGINE
+// Measures each item individually, never splits an item across pages.
+// If item doesnt fit, it starts on a fresh page.
+// ═══════════════════════════════════════
+function buildPages(t,sym,hasDesc,hasVT){
+  const layout=currentLayout;
+  const tableBased=isTableBased(layout);
+  const estH=ITEM_EST[layout]||40;
+
+  // Per-item height estimation (more accurate for variants)
+  function itemH(item){
+    const vtCount=hasVT?variantTypes.length:0;
+    if(layout==='table'||layout==='compact'||layout==='zebra'||layout==='minimal'||layout==='boxed'){
+      return (layout==='compact'?28:42)+(hasDesc&&item.desc?14:0);
+    }
+    if(layout==='menu') return 28+(vtCount*26)+(hasDesc&&item.desc?14:0)+14;
+    if(layout==='twocol') return 36+(vtCount*22)+(hasDesc&&item.desc?14:0);
+    // cards
+    return 36+(vtCount>0?32:0)+(hasDesc&&item.desc?18:0);
+  }
+
+  const TITLE_H = (sectionTitle&&sectionTitle.trim()) ? 62 : 0;
+  const TBL_H = tableBased ? TBL_HDR_H : 0;
+
+  // page 1 available body space
+  const p1Body = A4H - FULL_HDR - 40 - TITLE_H - TBL_H - 20;
+  // continuation pages
+  const pNBody = A4H - COMP_HDR - 40 - TBL_H - 20;
+
+  // ── Pack items into pages ──
+  const pages=[];          // array of arrays of items
+  let curPage=[];
+  let curUsed=0;
+  let firstPage=true;
+
+  items.forEach(item=>{
+    const h=itemH(item);
+    const avail=firstPage?p1Body:pNBody;
+    if(curUsed+h > avail && curPage.length>0){
+      // item doesnt fit — flush current page, start new
+      pages.push(curPage);
+      curPage=[item];
+      curUsed=h;
+      firstPage=false;
+    } else {
+      curPage.push(item);
+      curUsed+=h;
+    }
+  });
+  if(curPage.length) pages.push(curPage);
+
+  // ── Build pre-calculated table rows (index tracks global row index for striping) ──
+  let globalRowIdx=0;
+
+  // ── Build page HTML ──
+  let html='';
+  pages.forEach((pageItems,pi)=>{
+    const isFirst=pi===0;
+    html+=`<div class="doc-page" style="position:relative;background:${t.bg};height:${A4H}px;overflow:hidden">`;
+    html+=isFirst?buildFullHeader(t):buildCompactHeader(t);
+    html+=`<div style="padding:16px 48px 20px">`;
+
+    // Section heading only on first page
+    if(isFirst) html+=buildSectionHeading(t);
+
+    if(tableBased){
+      html+=buildTableHeaderRow(t,hasDesc,hasVT);
+      pageItems.forEach(item=>{
+        html+=buildTableRow(item,globalRowIdx,t,sym,hasDesc,hasVT,layout);
+        globalRowIdx++;
+      });
+    } else if(layout==='menu'){
+      html+=renderMenuBlock(pageItems,t,sym,hasDesc);
+    } else if(layout==='twocol'){
+      html+=renderTwoColBlock(pageItems,t,sym,hasDesc);
+    } else {
+      html+=renderCardsBlock(pageItems,t,sym,hasDesc);
+    }
+
+    html+=`</div>`;
+    // Watermark — on top of everything
+    html+=buildWatermark(t.bg);
+    html+=`</div>`;
+    // Visual gap between pages in preview
+    if(pi<pages.length-1) html+=`<div style="height:20px;background:#ccc"></div>`;
   });
   return html;
 }
 
 // ═══════════════════════════════════════
-// SPLIT / MENU LAYOUT
+// EXPORT — multi-page PDF
 // ═══════════════════════════════════════
-function renderSplit(t,sym,hasDesc,hasVT){
-  let html='<div style="padding:0 4px">';
-  items.forEach((item,i)=>{
-    html+=`<div style="margin-bottom:18px">`;
-    html+=`<div style="font-size:14px;font-weight:700;color:${t.nameText};margin-bottom:5px">${esc(item.name)||`Item ${i+1}`}</div>`;
-    if(hasDesc&&item.desc) html+=`<div style="font-size:11px;color:${t.descText};margin-bottom:7px;padding-left:2px">${esc(item.desc)}</div>`;
-    if(hasVT){
-      variantTypes.forEach(vt=>{
-        const p=item.prices[vt.id]||'';
-        html+=`<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:5px;padding-left:10px">
-          <span style="font-size:12px;font-weight:600;color:${t.vtText};white-space:nowrap;min-width:80px">${esc(vt.label||'?')}</span>
-          <span style="flex:1;border-bottom:1.5px dotted ${t.div};margin-bottom:3px"></span>
-          <span style="font-size:14px;font-weight:700;color:${t.priceText};white-space:nowrap">${p?sym+fmtP(p):'—'}</span>
-        </div>`;
-      });
-    } else {
-      html+=`<div style="display:flex;align-items:baseline;gap:6px">
-        <span style="flex:1;border-bottom:1.5px dotted ${t.div};margin-bottom:3px"></span>
-        <span style="font-size:15px;font-weight:700;color:${t.priceText}">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</span>
-      </div>`;
-    }
-    if(i<items.length-1) html+=`<div style="height:1px;background:${t.rowBord};margin-top:12px"></div>`;
-    html+='</div>';
-  });
-  return html+'</div>';
-}
+async function loadScript(src){return new Promise((res,rej)=>{if(document.querySelector(`script[src="${src}"]`))return res();const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
 
-// ═══════════════════════════════════════
-// TWO COLUMN LAYOUT
-// ═══════════════════════════════════════
-function renderTwoCol(t,sym,hasDesc,hasVT){
-  let html='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
-  items.forEach((item,i)=>{
-    html+=`<div style="background:${i%2===0?t.rowBg:t.rowAlt};border:1px solid ${t.rowBord};border-left:3px solid ${t.priceText};border-radius:4px;padding:14px 14px 12px">
-      <div style="font-size:13px;font-weight:700;color:${t.nameText};margin-bottom:${hasDesc&&item.desc?'4px':'8px'}">${esc(item.name)||`Item ${i+1}`}</div>
-      ${hasDesc&&item.desc?`<div style="font-size:10px;color:${t.descText};line-height:1.4;margin-bottom:8px">${esc(item.desc)}</div>`:''}`;
-    if(hasVT){
-      variantTypes.forEach(vt=>{
-        const p=item.prices[vt.id]||'';
-        html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px dotted ${t.rowBord}">
-          <span style="font-size:11px;color:${t.vtText}">${esc(vt.label||'?')}</span>
-          <span style="font-size:13px;font-weight:700;color:${t.priceText}">${p?sym+fmtP(p):'—'}</span>
-        </div>`;
-      });
-    } else {
-      html+=`<div style="display:flex;justify-content:space-between;padding:4px 0">
-        <span style="font-size:11px;color:${t.vtText}">Price</span>
-        <span style="font-size:15px;font-weight:700;color:${t.priceText}">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</span>
-      </div>`;
-    }
-    html+='</div>';
-  });
-  return html+'</div>';
-}
-
-// ═══════════════════════════════════════
-// CARD STACK LAYOUT
-// ═══════════════════════════════════════
-function renderCards(t,sym,hasDesc,hasVT){
-  let html='<div style="display:flex;flex-direction:column;gap:10px">';
-  items.forEach(item=>{
-    html+=`<div style="background:${t.rowBg};border:1px solid ${t.rowBord};border-radius:6px;padding:15px 18px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:${hasDesc&&item.desc?'6px':'8px'}">
-        <div style="font-size:14px;font-weight:700;color:${t.nameText}">${esc(item.name)||'—'}</div>
-        ${!hasVT?`<div style="font-size:17px;font-weight:800;color:${t.priceText}">${item.singlePrice?sym+fmtP(item.singlePrice):'—'}</div>`:''}
-      </div>
-      ${hasDesc&&item.desc?`<div style="font-size:11px;color:${t.descText};line-height:1.5;margin-bottom:10px">${esc(item.desc)}</div>`:''}`;
-    if(hasVT){
-      html+='<div style="display:flex;flex-wrap:wrap;gap:8px">';
-      variantTypes.forEach(vt=>{
-        const p=item.prices[vt.id]||'';
-        html+=`<div style="background:${t.chBg};border:1px solid ${t.rowBord};border-radius:5px;padding:5px 10px;text-align:center;min-width:72px">
-          <div style="font-size:9px;color:${t.vtText};font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">${esc(vt.label||'?')}</div>
-          <div style="font-size:14px;font-weight:700;color:${t.priceText}">${p?sym+fmtP(p):'—'}</div>
-        </div>`;
-      });
-      html+='</div>';
-    }
-    html+='</div>';
-  });
-  return html+'</div>';
-}
-
-// ═══════════════════════════════════════
-// EXPORT
-// ═══════════════════════════════════════
-async function loadScript(src){
-  return new Promise((res,rej)=>{
-    if(document.querySelector(`script[src="${src}"]`))return res();
-    const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);
-  });
-}
 async function exportDoc(type){
   const pb=document.getElementById('btn-pdf'),nb=document.getElementById('btn-png');
   pb.disabled=nb.disabled=true;
@@ -829,19 +689,33 @@ async function exportDoc(type){
   try{
     await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
     if(type==='pdf') await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+
     const shadow=document.querySelector('.preview-shadow');
-    const orig=shadow.style.transform; shadow.style.transform='none';
-    const canvas=await html2canvas(document.getElementById('doc'),{scale:2,useCORS:true,backgroundColor:null,logging:false});
-    shadow.style.transform=orig;
+    const orig=shadow.style.transform;shadow.style.transform='none';
     const biz=document.getElementById('f-business').value||'price-list';
-    if(type==='pdf'){
+
+    if(type==='png'){
+      // Single canvas of the whole doc
+      const canvas=await html2canvas(document.getElementById('doc'),{scale:3,useCORS:true,backgroundColor:null,logging:false,imageTimeout:0});
+      shadow.style.transform=orig;
+      const a=document.createElement('a');a.download=biz+'.png';a.href=canvas.toDataURL('image/png');a.click();
+    } else {
+      // Multi-page PDF: capture each .doc-page separately
       const {jsPDF}=window.jspdf;
       const pdf=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
-      const w=pdf.internal.pageSize.getWidth();
-      pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,w,(canvas.height*w)/canvas.width);
+      const pdfW=pdf.internal.pageSize.getWidth();
+      const pdfH=pdf.internal.pageSize.getHeight();
+      const pageEls=document.querySelectorAll('.doc-page');
+      for(let i=0;i<pageEls.length;i++){
+        if(i>0) pdf.addPage();
+        const canvas=await html2canvas(pageEls[i],{scale:3,useCORS:true,backgroundColor:null,logging:false,imageTimeout:0});
+        const imgH=(canvas.height*pdfW)/canvas.width;
+        // If content is shorter than A4, place it at top; if taller, scale to fit
+        const finalH=Math.min(imgH,pdfH);
+        pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,pdfW,finalH);
+      }
+      shadow.style.transform=orig;
       pdf.save(biz+'.pdf');
-    } else {
-      const a=document.createElement('a');a.download=biz+'.png';a.href=canvas.toDataURL('image/png');a.click();
     }
   }catch(err){alert('Export failed. Please try again.');console.error(err);}
   finally{pb.disabled=nb.disabled=false;pb.textContent='⬇ Download PDF';nb.textContent='🖼 PNG';}
@@ -850,13 +724,7 @@ async function exportDoc(type){
 // ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
-function init(){
-  buildLayoutGrid();
-  buildThemeSwatches();
-  renderVT();
-  renderItemsList();
-  renderPreview();
-}
+function init(){buildLayoutGrid();buildThemeSwatches();renderVT();renderItemsList();document.getElementById('logo-no').style.display='none';document.getElementById('logo-yes').style.display='block';document.getElementById('logo-preview-img').src=logoDataUrl;renderPreview();}
 init();
 </script>
 </body>
