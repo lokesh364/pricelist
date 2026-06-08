@@ -100,11 +100,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .accent-reset{font-size:10px;color:#6366f1;cursor:pointer;margin-top:2px}
 .accent-reset:hover{text-decoration:underline}
 .export-bar{padding:14px 20px;border-top:1px solid #f0f0f0;display:flex;gap:8px;background:#fff;flex-shrink:0}
-.btn-png{flex:1;padding:11px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;color:#555;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
-.btn-png:hover{background:#f8f9fa}
 .btn-pdf{flex:2;padding:11px;border-radius:8px;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .15s}
 .btn-pdf:hover{opacity:.9}
-.btn-pdf:disabled,.btn-png:disabled{opacity:.5;cursor:not-allowed}
+.btn-pdf:disabled{opacity:.5;cursor:not-allowed}
 .preview-area{flex:1;background:#e8eaed;display:flex;flex-direction:column;overflow:hidden}
 .preview-header{padding:12px 22px;border-bottom:1px solid #d8dadc;display:flex;align-items:center;justify-content:space-between;background:#edeef0;flex-shrink:0}
 .preview-label{font-size:10px;color:#999;letter-spacing:2px;font-weight:700}
@@ -214,8 +212,7 @@ CONTACT : 9295756242</textarea>
     </div>
   </div>
   <div class="export-bar">
-    <button class="btn-png" id="btn-png" onclick="exportDoc('png')">🖼 PNG</button>
-    <button class="btn-pdf" id="btn-pdf" onclick="exportDoc('pdf')">⬇ Download PDF</button>
+    <button class="btn-pdf" id="btn-pdf" onclick="exportDoc()" style="flex:1">⬇ Download PDF</button>
   </div>
 </div>
 
@@ -530,10 +527,11 @@ function renderCardsBlock(items,t,sym,hasDesc){
 // A4 inner content height = 1123px - header - padding
 // We measure each row/block height and break into pages
 // ═══════════════════════════════════════
-const A4H      = 1123;  // px total page height
-const FULL_HDR = 145;   // px for full header (accent + padding + name/contact)
-const COMP_HDR = 44;    // px for compact continuation header
-const BODY_PAD = 48;    // top+bottom body padding per page (24px each)
+// A4 at 96dpi = 794×1123px
+const A4H      = 1123;
+const FULL_HDR = 160;   // 5px bar + 32px pad + 64px logo/name row + 28px addr + 32px bottom pad = ~160
+const COMP_HDR = 48;    // 3px bar + 10px+10px pad + 18px text + border
+const BODY_PAD = 36;    // 16px top + 20px bottom in body div
 const ITEM_EST = {      // estimated px per item per layout
   table:   44,
   compact: 32,
@@ -544,7 +542,7 @@ const ITEM_EST = {      // estimated px per item per layout
   twocol:  105,
   cards:   90,
 };
-const TBL_HDR_H = 34;   // px for column header row in table layouts
+const TBL_HDR_H = 36;   // px for column header row: 11px font + 8px pad top/bottom + border
 
 function renderPreview(){
   const t=getTheme();
@@ -597,19 +595,39 @@ function buildPages(t,sym,hasDesc,hasVT){
   const tableBased=isTableBased(layout);
   const estH=ITEM_EST[layout]||40;
 
-  // Per-item height estimation (more accurate for variants)
+  // Per-item height estimation — calibrated to actual rendered CSS
   function itemH(item){
-    const vtCount=hasVT?variantTypes.length:0;
-    if(layout==='table'||layout==='compact'||layout==='zebra'||layout==='minimal'||layout==='boxed'){
-      return (layout==='compact'?28:42)+(hasDesc&&item.desc?14:0);
+    const vtCount = hasVT ? variantTypes.length : 0;
+    const descH   = (hasDesc && item.desc && item.desc.trim()) ? 18 : 0;
+
+    if(layout==='table'||layout==='zebra'||layout==='minimal'){
+      // font 16px, line-height ~1.3 = 21px, padding 9px top+bottom = 39px + desc
+      return 39 + descH;
     }
-    if(layout==='menu') return 28+(vtCount*26)+(hasDesc&&item.desc?14:0)+14;
-    if(layout==='twocol') return 36+(vtCount*22)+(hasDesc&&item.desc?14:0);
-    // cards
-    return 36+(vtCount>0?32:0)+(hasDesc&&item.desc?18:0);
+    if(layout==='compact'){
+      return 28 + descH;
+    }
+    if(layout==='boxed'){
+      return 42 + descH;
+    }
+    if(layout==='menu'){
+      // item name 16px (~22px) + each variant line ~30px + item divider 11px + gap 14px
+      return 22 + (vtCount * 30) + (vtCount===0 ? 24 : 0) + 11 + 14 + descH;
+    }
+    if(layout==='twocol'){
+      // card: name 16px (~24px) + each variant row 26px + card padding top+bottom 22px + gap 10px
+      // twocol packs items 2-wide so every 2 items = 1 visual row
+      // but we track per-item for safety — treat each as full height
+      return 24 + (vtCount * 26) + (vtCount===0 ? 26 : 0) + 22 + 10 + descH;
+    }
+    // cards layout
+    // card: name row ~28px + variant chips: chips are 58px tall, 3 per row
+    //       ceil(vtCount/3) rows * 58px + 8px gap between cards + padding 26px
+    const chipRows = vtCount > 0 ? Math.ceil(vtCount / 3) : 0;
+    return 28 + (chipRows * 62) + (vtCount === 0 ? 28 : 0) + 26 + 8 + descH;
   }
 
-  const TITLE_H = (sectionTitle&&sectionTitle.trim()) ? 62 : 0;
+  const TITLE_H = (sectionTitle&&sectionTitle.trim()) ? 68 : 0;
   const TBL_H = tableBased ? TBL_HDR_H : 0;
 
   // page 1 available body space
@@ -646,7 +664,7 @@ function buildPages(t,sym,hasDesc,hasVT){
   let html='';
   pages.forEach((pageItems,pi)=>{
     const isFirst=pi===0;
-    html+=`<div class="doc-page" style="position:relative;background:${t.bg};height:${A4H}px;overflow:hidden">`;
+    html+=`<div class="doc-page" style="position:relative;background:${t.bg};min-height:${A4H}px;overflow:visible">`;
     html+=isFirst?buildFullHeader(t):buildCompactHeader(t);
     html+=`<div style="padding:16px 48px 20px">`;
 
@@ -682,43 +700,79 @@ function buildPages(t,sym,hasDesc,hasVT){
 // ═══════════════════════════════════════
 async function loadScript(src){return new Promise((res,rej)=>{if(document.querySelector(`script[src="${src}"]`))return res();const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
 
-async function exportDoc(type){
-  const pb=document.getElementById('btn-pdf'),nb=document.getElementById('btn-png');
-  pb.disabled=nb.disabled=true;
-  type==='pdf'?pb.textContent='⏳ Generating...':nb.textContent='⏳ Exporting...';
+async function exportDoc(){
+  const pb=document.getElementById('btn-pdf');
+  pb.disabled=true; pb.textContent='⏳ Generating...';
   try{
     await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
-    if(type==='pdf') await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
 
-    const shadow=document.querySelector('.preview-shadow');
-    const orig=shadow.style.transform;shadow.style.transform='none';
-    const biz=document.getElementById('f-business').value||'price-list';
+    const shadow  = document.querySelector('.preview-shadow');
+    const origTx  = shadow.style.transform;
+    const origTxO = shadow.style.transformOrigin;
+    const biz     = document.getElementById('f-business').value||'price-list';
 
-    if(type==='png'){
-      // Single canvas of the whole doc
-      const canvas=await html2canvas(document.getElementById('doc'),{scale:3,useCORS:true,backgroundColor:null,logging:false,imageTimeout:0});
-      shadow.style.transform=orig;
-      const a=document.createElement('a');a.download=biz+'.png';a.href=canvas.toDataURL('image/png');a.click();
-    } else {
-      // Multi-page PDF: capture each .doc-page separately
-      const {jsPDF}=window.jspdf;
-      const pdf=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
-      const pdfW=pdf.internal.pageSize.getWidth();
-      const pdfH=pdf.internal.pageSize.getHeight();
-      const pageEls=document.querySelectorAll('.doc-page');
-      for(let i=0;i<pageEls.length;i++){
-        if(i>0) pdf.addPage();
-        const canvas=await html2canvas(pageEls[i],{scale:3,useCORS:true,backgroundColor:null,logging:false,imageTimeout:0});
-        const imgH=(canvas.height*pdfW)/canvas.width;
-        // If content is shorter than A4, place it at top; if taller, scale to fit
-        const finalH=Math.min(imgH,pdfH);
-        pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,pdfW,finalH);
-      }
-      shadow.style.transform=orig;
-      pdf.save(biz+'.pdf');
+    // Remove scaling so html2canvas captures at native 794px
+    shadow.style.transform='none';
+    shadow.style.transformOrigin='top left';
+
+    // Short delay so browser repaints at full size
+    await new Promise(r=>setTimeout(r,120));
+
+    const {jsPDF}=window.jspdf;
+    // Use A4 in mm — jsPDF default
+    const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:false});
+    const pdfW=pdf.internal.pageSize.getWidth();   // 210mm
+    const pdfH=pdf.internal.pageSize.getHeight();  // 297mm
+
+    const pageEls=document.querySelectorAll('.doc-page');
+
+    for(let i=0;i<pageEls.length;i++){
+      // Force exact A4 pixel dimensions for this capture
+      const el=pageEls[i];
+      const origH=el.style.minHeight;
+      const origOv=el.style.overflow;
+      el.style.minHeight=A4H+'px';
+      el.style.height=A4H+'px';
+      el.style.overflow='hidden';
+
+      // scale:4 for ultra-sharp text; 794*4=3176px wide canvas
+      const canvas=await html2canvas(el,{
+        scale:4,
+        useCORS:true,
+        allowTaint:true,
+        backgroundColor:null,
+        logging:false,
+        imageTimeout:0,
+        width:794,
+        height:1123,
+      });
+
+      // Restore
+      el.style.minHeight=origH;
+      el.style.height='';
+      el.style.overflow=origOv;
+
+      if(i>0) pdf.addPage();
+
+      // Convert canvas to high-quality JPEG (avoids PDF re-compression artefacts)
+      const imgData=canvas.toDataURL('image/jpeg',1.0);
+      // Fill the full A4 page exactly
+      pdf.addImage(imgData,'JPEG',0,0,pdfW,pdfH,`page${i}`,'FAST');
     }
-  }catch(err){alert('Export failed. Please try again.');console.error(err);}
-  finally{pb.disabled=nb.disabled=false;pb.textContent='⬇ Download PDF';nb.textContent='🖼 PNG';}
+
+    shadow.style.transform=origTx;
+    shadow.style.transformOrigin=origTxO;
+    pdf.save(biz+'.pdf');
+
+  }catch(err){
+    const shadow=document.querySelector('.preview-shadow');
+    shadow.style.transform='scale(.76)';
+    shadow.style.transformOrigin='top center';
+    alert('Export failed: '+err.message);
+    console.error(err);
+  }
+  finally{pb.disabled=false;pb.textContent='⬇ Download PDF';}
 }
 
 // ═══════════════════════════════════════
